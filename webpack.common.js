@@ -25,12 +25,12 @@ module.exports = {
         enforce: 'pre',
         test: /\.jsx?$/,
         use: ['eslint-loader'],
-        exclude: [/node_modules/]
+        exclude: [/node_modules/, /dist/]
       },
       {
         test: /\.jsx?$/,
         use: ['babel-loader'],
-        exclude: [/node_modules/],
+        exclude: [/node_modules/, /dist/],
       },
       {
         test: /\.(scss|css)$/,
