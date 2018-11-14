@@ -1,4 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-render(<div><h1>Grocerrific</h1></div>, document.getElementById('root'));
+import LandingPage from './components/Landing/LandingPage';
+import StorePage from './components/Store/StorePage';
+import InventoryPage from './components/Inventory/InventoryPage';
+
+import './assets/styles/index.scss';
+
+render(
+  <BrowserRouter>
+    <Fragment>
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/store" component={StorePage} />
+      <Route exact path="/inventory" component={InventoryPage} />
+    </Fragment>
+  </BrowserRouter>,
+  document.getElementById('root')
+);

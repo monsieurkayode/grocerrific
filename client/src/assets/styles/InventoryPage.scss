@@ -1,0 +1,124 @@
+#inventory {
+  @extend %flex__container_column;
+  @extend %nowrap;
+  min-height: 100%;
+
+  header {
+    @include header();
+    padding: px-to-rem(10px) 0;
+  }
+
+  #inventory__display {
+    flex: 1;
+    background: #f6f6f6;
+    padding: 50px 0 0;
+
+    .top {
+      padding: 0 8%;
+      margin: 0 auto;
+
+      .header {
+        display: inline-block;
+        font-family: $font-family-roboto;
+      }
+
+      .add__grocery {
+        float: right;
+        border: 2px solid #4d75a1;
+        background: transparent;
+        padding: px-to-rem(10px) px-to-rem(50px);
+        color: #4d75a1;
+        font-size: px-to-rem(14px);
+        font-family: $font-family-prompt;
+        border-radius: px-to-rem(50px);
+        text-shadow: 1px 2px 8px rgba(78, 45, 126, 0.3);
+        transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        transform: translateY(-8px);
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+          border: 2px solid #4d75a1;
+          background: #4d75a1;
+          color: #FFF;
+        }
+      }
+    }
+
+    .inventory__list {
+      margin: 40px auto;
+      width: 80%;
+
+      .table-header {
+        @extend %flex__container_row;
+        @extend %nowrap;
+        justify-content: space-between;
+        padding: 0 40px;
+        margin: 1%;
+
+        > div {
+          font-weight: 500;
+          font-size: 14px;
+          color: $light-grey-4;
+          font-family: $font-family-roboto;
+        }
+
+        .name {
+          width: 50%;
+        }
+
+        .action {
+          width: 10%;
+        }
+      }
+
+      .inventory__item_wrapper {
+        @extend %flex__container_row;
+        @extend %nowrap;
+        justify-content: space-between;
+        padding: 20px 40px;
+        background: #FFF;
+        border-radius: 5px;
+        margin: 1%;
+        box-shadow: 0 2px 5px -2px $light-grey-1;
+        overflow-x: hidden;
+
+        .item-name {
+          width: 50%;
+          font-weight: 500;
+          text-overflow: ellipsis;
+        }
+
+        .item-name,
+        .item-price,
+        .item-quantity {
+          font-family: $font-family-roboto;
+          color: $light-grey-6;
+        }
+
+        .buttons {
+          width: 10%;
+
+          .delete {
+            margin-left: 20px;
+            float: right;
+          }
+
+          .edit, .delete {
+            color: #4d75a1;
+            cursor: pointer;
+            font-size: 14px;
+            border: none;
+            background: transparent;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
