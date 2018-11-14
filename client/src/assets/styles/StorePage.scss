@@ -1,0 +1,78 @@
+#store {
+  @extend %flex__container_column;
+  @extend %nowrap;
+  flex: 1;
+  min-height: 100%;
+
+  header {
+    @include header();
+    padding: px-to-rem(10px) 0;
+  }
+
+  #grocery__display {
+    flex: 1;
+    background: #f6f6f6;
+    padding: 50px 0 0;
+
+    .grocery__list {
+      @extend %flex__container_row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .grocery__list_item {
+        flex: 1 0 30%;
+        max-width: px-to-rem(300px);
+        min-width: px-to-rem(300px);
+        background: #FFF;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 1%;
+        box-shadow: 0 15px 20px -6px $light-grey-1;
+        overflow-x: hidden;
+
+        .image__wrapper img {
+          width: 100%;
+          transition: all .5s linear;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+
+        .grocery__info {
+          .grocery__name {
+            font-family: $font-family-josefin;
+            padding: 6px 0;
+            font-size: px-to-rem(18px);
+          }
+
+          .grocery__price {
+            color: #4d75a1;
+            float: right;
+            font-size: px-to-rem(22px);
+            font-weight: 400;
+          }
+
+          .grocery__buttons {
+
+            .add {
+              font-weight: 500;
+              border-radius: 5px;
+              background: #ffc741;
+              border: none;
+              padding: 5px 10px;
+              cursor: pointer;
+              outline: none;
+              min-width: px-to-rem(100px);
+
+              &:active {
+                background: #fdd26d;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

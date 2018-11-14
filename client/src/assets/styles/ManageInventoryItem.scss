@@ -1,0 +1,55 @@
+.inventory__form {
+  margin: 20px 0;
+
+  .form-field {
+    margin: 25px 0;
+
+    span,
+    .error {
+      color: tomato;
+    }
+
+    .error {
+      font-size: 14px;
+      padding-top: 5px;
+      font-family: $font-family-prompt;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      display: inline-block;
+      width: 100%;
+      padding: 5px 0 5px 10px;
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid $light-grey-1;
+      font-family: $font-family-roboto;
+      font-size: 14px;
+      outline: none;
+
+      &:focus {
+        border: 1px solid #4d75a1;
+      }
+    }
+
+    input[type="text"] {
+      width: 100%;
+    }
+
+    .inline__field {
+      display: inline-block;
+      width: 45%;
+    }
+
+    .bottom {
+      float: right;
+    }
+
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-family: $font-family-josefin;
+    }
+  }
+}

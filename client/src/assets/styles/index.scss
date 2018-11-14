@@ -1,0 +1,89 @@
+@import 'base';
+@import 'Modal';
+@import 'LandingPage';
+@import 'StorePage';
+@import 'InventoryPage';
+@import 'Cart';
+@import 'ManageInventoryItem';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+  min-width: 1240px;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  max-width: 1500px;
+}
+
+.text__bold {
+  font-weight: 700;
+}
+
+.text__medium_bold {
+  font-weight: 500;
+}
+
+.text__medium {
+  font-weight: 400;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.cart__wrapper {
+  margin-left: 20px;
+  box-sizing: border-box;
+  transition: text-shadow .4s ease;
+  cursor: pointer;
+  outline: none;
+
+  .cart__count {
+    display: inline-block;
+    background: #4d75a1;
+    color: #f6f6f6;
+    transform: translateY(-10px);
+    padding: 1px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-family: Prompt, sans-serif;
+  }
+
+  .cart {
+    display: inline-block;
+    color: transparent;
+    font-size: 30px;
+    vertical-align: middle;
+    -webkit-text-stroke-color: #4d75a1;
+    -webkit-text-stroke-width: 1.2px;
+    transition: all .2s ease-in;
+
+    &:hover {
+      -webkit-text-stroke-color: #FFF;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+%flex__container {
+  display: flex;
+}
+
+%flex__container_column {
+  @extend %flex__container;
+  flex-direction: column;
+}
+
+%flex__container_row {
+  @extend %flex__container;
+  flex-direction: row;
+}
+
+%nowrap {
+  flex-wrap: nowrap;
+}
+
+@mixin header {
+  @extend %flex__container_row;
+  @extend %nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  margin: 0 px-to-rem(60px);
+  padding: px-to-rem(20px) 0;
+  user-select: none;
+
+  .header__left {
+    @extend %flex__container;
+    justify-content: space-between;
+    align-items: center;
+
+    #logo {
+      max-height: 40px;
+      margin-right: px-to-rem(5px);
+    }
+
+    #brand {
+      color: #FFF;
+      font-family: $font-family-josefin;
+      letter-spacing: 0;
+      font-size: px-to-rem(22px);
+      text-shadow: 1px 2px 8px rgba(78, 45, 126, 0.3);
+      cursor: pointer;
+
+      sup {
+        font-weight: 400;
+        font-size: px-to-rem(12px);
+      }
+    }
+  }
+
+  .header__right {
+    @extend %flex__container_row;
+    @extend %nowrap;
+
+    a { text-decoration: none; }
+    .start {
+      border: 2px solid #4d75a1;
+      padding: px-to-rem(5px) px-to-rem(30px);
+      margin-left: px-to-rem(20px);
+      color: #FFF;
+      font-size: px-to-rem(11px);
+      font-family: $font-family-prompt;
+      border-radius: px-to-rem(50px);
+      text-shadow: 1px 2px 8px rgba(78, 45, 126, 0.3);
+      transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+      cursor: pointer;
+
+      &:hover {
+        border: 2px solid #FFF;
+        background: #FFF;
+        color: #4d75a1;
+        transform: scale(1.1)
+      }
+    }
+  }
+}
+
+@mixin backdrop {
+  box-shadow: 0 0 30px 0 $light-grey-1,
+              0 15px 20px -6px $light-grey-1;
+}
