@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import favicon from 'serve-favicon';
 import compression from 'compression';
@@ -10,8 +11,10 @@ import { STATUS_CODES } from 'http';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware'; // eslint-disable-line
 import webpackHotMiddleware from 'webpack-hot-middleware'; // eslint-disable-line
-import webpackConfig from '../../webpack.config.dev';
+import webpackConfig from '../../webpack.config.dev'; // eslint-disable-line
 import dbConfig from './config';
+import routes from './routes/groceryItem';
+import { seedDb } from './seeds/groceryItemSeed';
 
 dotenv.config();
 
@@ -22,7 +25,10 @@ const compiler = webpack(webpackConfig);
 const app = express();
 
 if (config.use_env_variable) {
-  mongoose.connect(process.env[config.use_env_variable]);
+  mongoose.connect(
+    process.env[config.use_env_variable],
+    { useNewUrlParser: true }
+  );
 } else {
   const {
     prefix,
@@ -30,7 +36,7 @@ if (config.use_env_variable) {
     database
   } = config;
   const url = `${prefix}://${host}:${config.port}/${database}`;
-  mongoose.connect(url);
+  mongoose.connect(url, { useNewUrlParser: true });
 }
 
 // use the global promise library for mongoose
@@ -52,7 +58,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.disable('x-powered-by');
 
-if (process.env.NODE_ENV !== 'production') {
+if (env !== 'production') {
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath
@@ -61,9 +67,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // use logger only for development and peoduction
-if (process.env.NODE_ENV !== 'test') {
-    // logger for server requests and responses
-    app.use(logger('dev'));
+if (env !== 'test') {
+  // logger for server requests and responses
+  app.use(logger('dev'));
 }
 
 app.get('/api', (req, res) => {
@@ -72,6 +78,8 @@ app.get('/api', (req, res) => {
     message: 'Status connected ok'
   });
 });
+
+app.use(routes);
 
 app.use('*', (req, res) => {
   res.sendFile(resolve(__dirname, '../client/index.html'));
@@ -84,7 +92,8 @@ app.listen(port, (err) => {
   }
   db.on('error', console.error.bind(console, 'Error connecting to database'));
   db.once('open', () => {
-    console.info('Database connection established');
-    console.info(`Server started on ${port}`);
+    console.info('🍺 Database connection established...');
+    console.info(`🍺 Server started on ${port}`);
+    if (env !== 'production') seedDb();
   });
 });
