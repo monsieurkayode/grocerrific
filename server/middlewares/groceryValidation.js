@@ -1,4 +1,5 @@
 import { STATUS_CODES } from 'http';
+import mongoose from 'mongoose';
 import { validateForm } from '../../shared/validator';
 import errorHandler from '../helpers/errorHandler';
 import GroceryItem from '../models/groceryItem';
@@ -23,4 +24,12 @@ export const checkDuplicate = (req, res, next) => {
     }
     next();
   });
+};
+
+export const validateParams = (req, res, next) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return errorHandler(404, 'Grocery Item not found', res);
+  }
+  next();
 };
