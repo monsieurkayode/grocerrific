@@ -26,6 +26,12 @@ export const checkDuplicate = (req, res, next) => {
   });
 };
 
+export const validateUpdate = (req, res, next) => {
+  const { errors, isValid } = validateForm(req.body, false);
+  if (isValid) return next();
+  return errorHandler(422, errors, res);
+};
+
 export const validateParams = (req, res, next) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
