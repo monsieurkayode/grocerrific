@@ -12,5 +12,10 @@ router.post(
   validate.checkDuplicate,
   groceryItemController.addGrocery
 );
+router.delete(
+  `${baseUrl}/:id`,
+  validate.validateParams,
+  groceryItemController.deleteGrocery
+);
 
 export default router;

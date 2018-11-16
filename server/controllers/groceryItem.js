@@ -37,5 +37,23 @@ export const addGrocery = (req, res) => {
 
 export const updateGrocery = () => {};
 export const fetchGrocery = () => {};
-export const deleteGrocery = () => {};
+
+export const deleteGrocery = (req, res) => {
+  const query = GroceryItem.findByIdAndDelete(req.params.id);
+
+  return query.exec((err, grocery) => {
+    if (err) return errorHandler(400, err, res);
+    if (grocery) {
+      return res.status(200).send({
+        status: STATUS_CODES[200],
+        message: `${grocery.name} removed from Inventory`
+      });
+    }
+    return res.status(404).send({
+      status: STATUS_CODES[404],
+      message: 'Grocery Item not found'
+    });
+  });
+};
+
 export const checkoutCart = () => {};
