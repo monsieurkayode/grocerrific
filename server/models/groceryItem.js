@@ -25,10 +25,6 @@ const groceryItemSchema = new Schema({
 });
 
 groceryItemSchema.pre('save', function (next) { // eslint-disable-line
-  if (this.quantity < 0) {
-    return next(new Error('Quantity cannot be less than 0'));
-  }
-
   this.set({ inStock: this.quantity > 0 });
   next();
 });

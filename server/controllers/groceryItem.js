@@ -16,7 +16,25 @@ export const fetchGroceries = (req, res) => {
   });
 };
 
-export const addGrocery = () => {};
+export const addGrocery = (req, res) => {
+  const { name, quantity, price } = req.body;
+  const newGrocery = new GroceryItem({
+    name,
+    quantity,
+    price
+  });
+
+  return newGrocery.save((err, grocery) => {
+    if (err) return errorHandler(400, err, res);
+
+    return res.status(201).send({
+      status: STATUS_CODES[201],
+      message: `${grocery.name} added to Inventory`,
+      grocery
+    });
+  });
+};
+
 export const updateGrocery = () => {};
 export const fetchGrocery = () => {};
 export const deleteGrocery = () => {};
