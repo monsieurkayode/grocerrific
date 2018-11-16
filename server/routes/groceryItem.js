@@ -17,5 +17,11 @@ router.delete(
   validate.validateParams,
   groceryItemController.deleteGrocery
 );
+router.patch(
+  `${baseUrl}/:id`,
+  validate.validateParams,
+  validate.validateUpdate,
+  groceryItemController.updateGrocery
+);
 
 export default router;

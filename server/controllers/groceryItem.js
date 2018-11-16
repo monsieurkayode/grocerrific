@@ -35,8 +35,32 @@ export const addGrocery = (req, res) => {
   });
 };
 
-export const updateGrocery = () => {};
-export const fetchGrocery = () => {};
+export const updateGrocery = (req, res) => {
+  const query = GroceryItem.findById(req.params.id);
+
+  return query.exec((err, grocery) => {
+    if (err) return errorHandler(400, err, res);
+
+    if (grocery) {
+      grocery.set({
+        name: req.body.name || grocery.name,
+        quantity: req.body.quantity || grocery.quantity,
+        price: req.body.price || grocery.price
+      });
+      return grocery.save((error, updatedGrocery) => {
+        if (error) return errorHandler(400, err, res);
+        return res.status(200).send({
+          status: STATUS_CODES[200],
+          grocery: updatedGrocery
+        });
+      });
+    }
+    return res.status(404).send({
+      status: STATUS_CODES[404],
+      message: 'Grocery Item not found'
+    });
+  });
+};
 
 export const deleteGrocery = (req, res) => {
   const query = GroceryItem.findByIdAndDelete(req.params.id);
