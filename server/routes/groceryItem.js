@@ -23,5 +23,6 @@ router.patch(
   validate.validateUpdate,
   groceryItemController.updateGrocery
 );
+router.patch('/api/v1/checkout', groceryItemController.checkoutCart);
 
 export default router;
