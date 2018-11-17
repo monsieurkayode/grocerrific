@@ -1,7 +1,6 @@
 #store {
   @extend %flex__container_column;
   @extend %nowrap;
-  flex: 1;
   min-height: 100%;
 
   header {
@@ -11,8 +10,9 @@
 
   #grocery__display {
     flex: 1;
+    @extend %flex__container_column;
     background: #f6f6f6;
-    padding: 50px 0 0;
+    padding: 50px 0;
 
     .grocery__list {
       @extend %flex__container_row;
@@ -45,6 +45,7 @@
             font-family: $font-family-josefin;
             padding: 6px 0;
             font-size: px-to-rem(18px);
+            text-transform: capitalize;
           }
 
           .grocery__price {
@@ -66,8 +67,13 @@
               outline: none;
               min-width: px-to-rem(100px);
 
-              &:active {
+              &:active:not(:disabled) {
                 background: #fdd26d;
+              }
+
+              &:disabled {
+                background: #fdd26d;
+                cursor: not-allowed;
               }
             }
           }
