@@ -11,11 +11,10 @@
   #inventory__display {
     flex: 1;
     background: #f6f6f6;
-    padding: 50px 0 0;
+    padding: 50px 0;
 
     .top {
       padding: 0 8%;
-      margin: 0 auto;
 
       .header {
         display: inline-block;
@@ -92,6 +91,7 @@
           width: 50%;
           font-weight: 500;
           text-overflow: ellipsis;
+          text-transform: capitalize;
         }
 
         .item-name,

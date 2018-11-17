@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  func, arrayOf, shape, bool
+} from 'prop-types';
+import fetchGroceries from '../../actions/groceryActions';
 
 import Cart from '../Store/Cart';
 import Header from '../common/Header';
@@ -7,6 +12,12 @@ import InventoryList from './InventoryList';
 import ManageInventoryItem from './ManageInventoryItem';
 
 class InventoryPage extends Component {
+  static propTypes = {
+    fetchGroceries: func.isRequired,
+    groceries: arrayOf(shape({})).isRequired,
+    isLoading: bool.isRequired
+  }
+
   static initialState = () => ({
     displayModal: false,
     displayCart: false,
@@ -19,6 +30,10 @@ class InventoryPage extends Component {
   })
 
   state = { ...InventoryPage.initialState() }
+
+  componentDidMount() {
+    this.props.fetchGroceries();
+  }
 
   toggleModal = () => {
     this.setState(prevState => ({
@@ -53,6 +68,7 @@ class InventoryPage extends Component {
 
   render() {
     const { displayModal, displayCart, groceryItem } = this.state;
+    const { groceries, isLoading } = this.props;
 
     return (
       <main id="inventory" className="container">
@@ -86,7 +102,11 @@ class InventoryPage extends Component {
               Add Grocery
             </button>
           </div>
-          <InventoryList openModal={this.openEditModal} />
+          <InventoryList
+            openModal={this.openEditModal}
+            groceries={groceries}
+            loading={isLoading}
+          />
         </section>
         { displayModal && (
           <ManageInventoryItem
@@ -102,4 +122,9 @@ class InventoryPage extends Component {
   }
 }
 
-export default InventoryPage;
+const mapStateToProps = ({ allGroceries }) => ({
+  isLoading: allGroceries.isLoading,
+  groceries: allGroceries.groceries
+});
+
+export default connect(mapStateToProps, { fetchGroceries })(InventoryPage);
