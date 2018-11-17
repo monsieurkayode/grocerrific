@@ -20,13 +20,7 @@ const groceryItemSchema = new Schema({
     type: Number,
     min: [0, 'Invalid quanity value'],
     required: [true, 'Quantity is required'],
-  },
-  inStock: Boolean
-});
-
-groceryItemSchema.pre('save', function (next) { // eslint-disable-line
-  this.set({ inStock: this.quantity > 0 });
-  next();
+  }
 });
 
 const GroceryItemModel = mongoose.model('GroceryItem', groceryItemSchema);
