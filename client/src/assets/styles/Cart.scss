@@ -26,6 +26,7 @@
       width: 50%;
       font-size: 14.5px;
       white-space: nowrap;
+      text-transform: capitalize;
     }
 
     #total {
@@ -52,6 +53,11 @@
       border: none;
       font-weight: 900;
       background: transparent;
+
+      &:disabled {
+        cursor: not-allowed;
+        color: $light-grey-4;
+      }
     }
 
     .quantity {
@@ -61,10 +67,15 @@
       outline: none;
       padding: 4px 8px;
       border: 1px solid $light-grey-1;
+
+      &:focus {
+        border: 1px solid #4d75a1;
+      }
     }
 
     .remove {
       cursor: pointer;
+      outline: none;
     }
 
     .buy {
