@@ -9,7 +9,8 @@ import {
   fetchGroceries,
   removeGroceryFromCart,
   addGroceryItem,
-  setError
+  setError,
+  updateGroceryItem
 } from '../../actions/groceryActions';
 import { validateForm } from '../../../../shared/validator';
 import { toastError } from '../../helpers/toaster';
@@ -29,7 +30,8 @@ class InventoryPage extends Component {
     isLoading: bool.isRequired,
     isAdding: bool.isRequired,
     error: shape({}).isRequired,
-    setError: func.isRequired
+    setError: func.isRequired,
+    updateGroceryItem: func.isRequired
   }
 
   static initialState = () => ({
@@ -98,11 +100,13 @@ class InventoryPage extends Component {
 
     if (isValid) {
       this.props.setError({});
-      this.props.addGroceryItem(groceryItem)
+      const action = groceryItem.id
+        ? this.props.updateGroceryItem
+        : this.props.addGroceryItem;
+      action(groceryItem)
         .then(() => {
           const { error } = this.props;
           if (Object.keys(error).length > 0) {
-            // Show toast notification for failure here
             toastError(error.message);
           }
           this.setState({ ...InventoryPage.initialState() });
@@ -208,5 +212,6 @@ export default connect(mapStateToProps, {
   fetchGroceries,
   removeGroceryFromCart,
   addGroceryItem,
-  setError
+  setError,
+  updateGroceryItem
 })(InventoryPage);

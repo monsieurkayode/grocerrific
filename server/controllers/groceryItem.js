@@ -52,7 +52,8 @@ export const updateGrocery = (req, res) => {
         if (error) return errorHandler(400, err, res);
         return res.status(200).send({
           status: STATUS_CODES[200],
-          grocery: updatedGrocery
+          grocery: updatedGrocery,
+          message: `${grocery.name} updated in Inventory`
         });
       });
     }
