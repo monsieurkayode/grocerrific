@@ -14,7 +14,8 @@ const TextField = ({
   error,
   value,
   field,
-  onChange
+  onChange,
+  onFocus
 }) => (
   <div className={field}>
     <label htmlFor={name}>{label}&nbsp;<span>*</span></label>
@@ -24,9 +25,15 @@ const TextField = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
-      className={error.length > 0 && 'alert'}
+      onFocus={onFocus}
+      className={error.length > 0 ? 'alert' : ''}
     />
-    { error.length > 0 && <div className="error">{error}</div> }
+    <div
+      style={{ visibility: error.length > 0 ? 'visible' : 'hidden' }}
+      className="error"
+    >
+      &nbsp;{error}
+    </div>
   </div>
 );
 
@@ -45,7 +52,8 @@ TextField.propTypes = {
   error: string,
   value: oneOfType([string, number]),
   field: string,
-  onChange: func.isRequired
+  onChange: func.isRequired,
+  onFocus: func.isRequired
 };
 
 export default TextField;

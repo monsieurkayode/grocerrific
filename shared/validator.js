@@ -22,7 +22,7 @@ export const validateForm = (formData, create = true) => {
     if (!fields.includes(key)) return;
     const inputLength = value.toString().trim().length;
 
-    if (!inputLength) { errors[key] = `${key} is required`; }
+    if (!inputLength) { errors[key] = `${caps(key)} is required`; }
     if (inputLength && inputLength < minLength && key === 'name') {
       errors[key] = `${caps(key)} too short`;
     }

@@ -46,7 +46,7 @@ const GroceryItem = ({
 
   return (
     <div className="grocery__list_item">
-      <div className="image__wrapper">
+      <div className="image__wrapper effect">
         <img src={defaultImage} alt="" />
       </div>
       <article className="grocery__info">

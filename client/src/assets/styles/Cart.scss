@@ -95,6 +95,9 @@
 
       &:disabled {
         cursor: not-allowed;
+        border: 2px solid #4d75a1;
+        background: #4d75a1;
+        color: #FFF;
       }
 
       &:hover:not(:disabled) {
