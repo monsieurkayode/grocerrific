@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import {
   func, arrayOf, shape, bool
 } from 'prop-types';
-import fetchGroceries from '../../actions/groceryActions';
+import {
+  fetchGroceries,
+  addGroceryToCart,
+  removeGroceryFromCart
+} from '../../actions/groceryActions';
 
 import Header from '../common/Header';
 import GroceryItemList from './GroceryItemList';
@@ -14,7 +18,10 @@ class StorePage extends Component {
   static propTypes = {
     fetchGroceries: func.isRequired,
     groceries: arrayOf(shape({})).isRequired,
-    isLoading: bool.isRequired
+    cartItems: arrayOf(shape({})).isRequired,
+    isLoading: bool.isRequired,
+    addGroceryToCart: func.isRequired,
+    removeGroceryFromCart: func.isRequired
   }
 
   state = {
@@ -33,7 +40,7 @@ class StorePage extends Component {
 
   render() {
     const { displayModal } = this.state;
-    const { groceries, isLoading } = this.props;
+    const { groceries, isLoading, cartItems } = this.props;
     return (
       <main id="store" className="container">
         <Header>
@@ -51,23 +58,39 @@ class StorePage extends Component {
               className="cart__wrapper"
             >
               <i className="material-icons cart">shopping_cart</i>
-              <div className="cart__count">2</div>
+              <div className="cart__count">{cartItems.length}</div>
             </div>
           </div>
         </Header>
         <GroceryItemList
           groceries={groceries}
           loading={isLoading}
+          addToCart={this.props.addGroceryToCart}
+          removeFromCart={this.props.removeGroceryFromCart}
+          cartItems={cartItems}
         />
-        { displayModal && <Cart closeModal={this.toggleModal} /> }
+        { displayModal && (
+          <Cart
+            closeModal={this.toggleModal}
+            cartItems={cartItems}
+            removeFromCart={this.props.removeGroceryFromCart}
+          />
+        )}
       </main>
     );
   }
 }
 
-const mapStateToProps = ({ allGroceries }) => ({
+const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
-  groceries: allGroceries.groceries
+  groceries: allGroceries.groceries,
+  cartItems: allCartItems.cartItems
 });
 
-export default connect(mapStateToProps, { fetchGroceries })(StorePage);
+export default connect(
+  mapStateToProps, {
+    fetchGroceries,
+    addGroceryToCart,
+    removeGroceryFromCart
+  }
+)(StorePage);

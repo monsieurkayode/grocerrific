@@ -24,6 +24,7 @@ const TextField = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      className={error.length > 0 && 'alert'}
     />
     { error.length > 0 && <div className="error">{error}</div> }
   </div>

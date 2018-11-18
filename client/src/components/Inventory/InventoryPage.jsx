@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import {
   func, arrayOf, shape, bool
 } from 'prop-types';
-import fetchGroceries from '../../actions/groceryActions';
+import {
+  fetchGroceries,
+  removeGroceryFromCart
+} from '../../actions/groceryActions';
 
 import Cart from '../Store/Cart';
 import Header from '../common/Header';
@@ -14,7 +17,9 @@ import ManageInventoryItem from './ManageInventoryItem';
 class InventoryPage extends Component {
   static propTypes = {
     fetchGroceries: func.isRequired,
+    removeGroceryFromCart: func.isRequired,
     groceries: arrayOf(shape({})).isRequired,
+    cartItems: arrayOf(shape({})).isRequired,
     isLoading: bool.isRequired
   }
 
@@ -68,7 +73,7 @@ class InventoryPage extends Component {
 
   render() {
     const { displayModal, displayCart, groceryItem } = this.state;
-    const { groceries, isLoading } = this.props;
+    const { groceries, cartItems, isLoading } = this.props;
 
     return (
       <main id="inventory" className="container">
@@ -87,7 +92,7 @@ class InventoryPage extends Component {
               className="cart__wrapper"
             >
               <i className="material-icons cart">shopping_cart</i>
-              <div className="cart__count">2</div>
+              <div className="cart__count">{cartItems.length}</div>
             </div>
           </div>
         </Header>
@@ -116,15 +121,25 @@ class InventoryPage extends Component {
             handleInputChange={this.handleInputChange}
           />)
         }
-        { displayCart && <Cart closeModal={this.openCartModal} /> }
+        { displayCart && (
+          <Cart
+            closeModal={this.openCartModal}
+            cartItems={cartItems}
+            removeFromCart={this.props.removeGroceryFromCart}
+          />)
+        }
       </main>
     );
   }
 }
 
-const mapStateToProps = ({ allGroceries }) => ({
+const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
-  groceries: allGroceries.groceries
+  groceries: allGroceries.groceries,
+  cartItems: allCartItems.cartItems
 });
 
-export default connect(mapStateToProps, { fetchGroceries })(InventoryPage);
+export default connect(mapStateToProps, {
+  fetchGroceries,
+  removeGroceryFromCart
+})(InventoryPage);

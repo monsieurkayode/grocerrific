@@ -55,6 +55,7 @@
   .header__right {
     @extend %flex__container_row;
     @extend %nowrap;
+    justify-content: space-between;
 
     a { text-decoration: none; }
     .start {

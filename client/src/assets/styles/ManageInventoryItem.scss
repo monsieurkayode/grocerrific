@@ -32,6 +32,13 @@
       }
     }
 
+    input[type="text"],
+    input[type="number"] {
+      &.alert {
+        border: 1px solid tomato;
+      }
+    }
+
     input[type="text"] {
       width: 100%;
       text-transform: capitalize;
