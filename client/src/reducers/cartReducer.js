@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import * as types from '../actions/actionTypes';
 import { initialCartItems } from './initialState';
 

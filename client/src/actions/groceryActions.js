@@ -19,20 +19,19 @@ const fetchGroceriesSuccess = groceries => ({
   groceries
 });
 
-export const fetchGroceries = () => (dispatch) => {
+export const fetchGroceries = () => async (dispatch) => {
   dispatch(fetchGroceriesLoading(true));
 
-  return axios.get(baseUrl)
-    .then((response) => {
-      const { groceries } = response.data;
-      dispatch(fetchGroceriesSuccess(groceries));
-      dispatch(fetchGroceriesLoading(false));
-    })
-    .catch((error) => {
-      const { data } = error.response;
-      dispatch(fetchGroceriesFailure(data));
-      dispatch(fetchGroceriesLoading(false));
-    });
+  try {
+    const response = await axios.get(baseUrl);
+    const { groceries } = response.data;
+    dispatch(fetchGroceriesSuccess(groceries));
+    dispatch(fetchGroceriesLoading(false));
+  } catch (error) {
+    const { data } = error.response;
+    dispatch(fetchGroceriesFailure(data));
+    dispatch(fetchGroceriesLoading(false));
+  }
 };
 
 export const addGroceryToCart = grocery => dispatch => dispatch({
@@ -70,19 +69,44 @@ export const setError = error => dispatch => dispatch({
   error
 });
 
-export const addGroceryItem = formData => (dispatch) => {
+export const addGroceryItem = formData => async (dispatch) => {
   dispatch(addingGroceryItem(true));
 
-  return axios.post(baseUrl, formData)
-    .then((response) => {
-      const { grocery, message } = response.data;
-      dispatch(addGroceryItemSuccess(grocery));
-      dispatch(addingGroceryItem(false));
-      toastSuccess(message);
-    })
-    .catch((error) => {
-      const { data } = error.response;
-      dispatch(addGroceryItemFailure(data));
-      dispatch(addingGroceryItem(false));
-    });
+  try {
+    const response = await axios.post(baseUrl, formData);
+    const { grocery, message } = response.data;
+    dispatch(addGroceryItemSuccess(grocery));
+    dispatch(addingGroceryItem(false));
+    toastSuccess(message);
+  } catch (error) {
+    const { data } = error.response;
+    dispatch(addGroceryItemFailure(data));
+    dispatch(addingGroceryItem(false));
+  }
+};
+
+const updateGroceryItemFailure = error => ({
+  type: types.UPDATE_GROCERY_ITEM_FAILURE,
+  error
+});
+
+const updateGroceryItemSucces = grocery => ({
+  type: types.UPDATE_GROCERY_ITEM_SUCCESS,
+  grocery
+});
+
+export const updateGroceryItem = formData => async (dispatch) => {
+  dispatch(addingGroceryItem(true));
+
+  try {
+    const response = await axios.patch(`${baseUrl}/${formData.id}`, formData);
+    const { grocery, message } = response.data;
+    dispatch(updateGroceryItemSucces(grocery));
+    dispatch(addingGroceryItem(false));
+    toastSuccess(message);
+  } catch (error) {
+    const { data } = error.response;
+    dispatch(updateGroceryItemFailure(data));
+    dispatch(addingGroceryItem(false));
+  }
 };
