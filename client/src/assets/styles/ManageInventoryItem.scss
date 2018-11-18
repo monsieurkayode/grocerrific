@@ -1,9 +1,14 @@
 .inventory__form {
   margin: 20px 0;
 
-  .form-field {
-    margin: 25px 0;
+  .bottom {
+    @extend %flex__container_row;
+    @extend %nowrap;
+    justify-content: space-between;
+  }
 
+  .form-field {
+    margin-bottom: 10px;
     span,
     .error {
       color: tomato;
@@ -45,14 +50,8 @@
     }
 
     .inline__field {
-      display: inline-block;
       width: 45%;
     }
-
-    .bottom {
-      float: right;
-    }
-
 
     label {
       display: block;

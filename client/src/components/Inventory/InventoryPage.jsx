@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import {
   func, arrayOf, shape, bool
 } from 'prop-types';
 import {
   fetchGroceries,
-  removeGroceryFromCart
+  removeGroceryFromCart,
+  addGroceryItem,
+  setError
 } from '../../actions/groceryActions';
+import { validateForm } from '../../../../shared/validator';
+import { toastError } from '../../helpers/toaster';
 
 import Cart from '../Store/Cart';
 import Header from '../common/Header';
@@ -18,9 +23,13 @@ class InventoryPage extends Component {
   static propTypes = {
     fetchGroceries: func.isRequired,
     removeGroceryFromCart: func.isRequired,
+    addGroceryItem: func.isRequired,
     groceries: arrayOf(shape({})).isRequired,
     cartItems: arrayOf(shape({})).isRequired,
-    isLoading: bool.isRequired
+    isLoading: bool.isRequired,
+    isAdding: bool.isRequired,
+    error: shape({}).isRequired,
+    setError: func.isRequired
   }
 
   static initialState = () => ({
@@ -31,13 +40,24 @@ class InventoryPage extends Component {
       name: '',
       price: '',
       quantity: ''
-    }
+    },
+    errors: {}
   })
 
   state = { ...InventoryPage.initialState() }
 
+  rootRef = React.createRef();
+
   componentDidMount() {
     this.props.fetchGroceries();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.displayModal || nextState.displayCart) {
+      this.rootRef.current.parentNode.style.overflow = 'hidden';
+    } else {
+      this.rootRef.current.parentNode.style.overflow = '';
+    }
   }
 
   toggleModal = () => {
@@ -71,12 +91,51 @@ class InventoryPage extends Component {
     this.setState({ groceryItem });
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { groceryItem } = this.state;
+    const { isValid, errors } = validateForm(groceryItem);
+
+    if (isValid) {
+      this.props.setError({});
+      this.props.addGroceryItem(groceryItem)
+        .then(() => {
+          const { error } = this.props;
+          if (Object.keys(error).length > 0) {
+            // Show toast notification for failure here
+            toastError(error.message);
+          }
+          this.setState({ ...InventoryPage.initialState() });
+        });
+    }
+
+    this.setState({ errors });
+  }
+
+  handleFocus = (event) => {
+    const { errors } = this.state;
+    errors[event.target.name] = '';
+    this.setState({ errors });
+  }
+
   render() {
-    const { displayModal, displayCart, groceryItem } = this.state;
-    const { groceries, cartItems, isLoading } = this.props;
+    const {
+      displayModal,
+      displayCart,
+      groceryItem,
+      errors
+    } = this.state;
+
+    const {
+      groceries,
+      cartItems,
+      isLoading,
+      isAdding
+    } = this.props;
 
     return (
-      <main id="inventory" className="container">
+      <main ref={this.rootRef} id="inventory" className="container">
+        <ToastContainer className="capitalize" />
         <Header>
           <div className="header__right">
             <Link to="/store">
@@ -119,6 +178,10 @@ class InventoryPage extends Component {
             groceryItem={groceryItem}
             closeModal={this.closeModal}
             handleInputChange={this.handleInputChange}
+            handleSubmit={this.handleSubmit}
+            handleFocus={this.handleFocus}
+            saving={isAdding}
+            errors={errors}
           />)
         }
         { displayCart && (
@@ -135,11 +198,15 @@ class InventoryPage extends Component {
 
 const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
+  isAdding: allGroceries.isAdding,
+  error: allGroceries.error,
   groceries: allGroceries.groceries,
   cartItems: allCartItems.cartItems
 });
 
 export default connect(mapStateToProps, {
   fetchGroceries,
-  removeGroceryFromCart
+  removeGroceryFromCart,
+  addGroceryItem,
+  setError
 })(InventoryPage);

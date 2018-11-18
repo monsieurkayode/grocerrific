@@ -1,6 +1,8 @@
 export const initialGroceries = {
   isLoading: false,
-  groceries: []
+  isAdding: false,
+  groceries: [],
+  error: {}
 };
 
 export const initialCartItems = {
