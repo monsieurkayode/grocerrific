@@ -4,6 +4,7 @@ import { func, string, number } from 'prop-types';
 
 const InventoryListItem = ({
   openModal,
+  openDeleteModal,
   _id,
   name,
   quantity,
@@ -26,13 +27,20 @@ const InventoryListItem = ({
       >
         Edit
       </button>
-      <button className="delete" type="button">Delete</button>
+      <button
+        className="delete"
+        type="button"
+        onClick={() => openDeleteModal({ id: _id, name })}
+      >
+        Delete
+      </button>
     </div>
   </div>
 );
 
 InventoryListItem.propTypes = {
   openModal: func.isRequired,
+  openDeleteModal: func.isRequired,
   _id: string.isRequired,
   name: string.isRequired,
   price: number.isRequired,

@@ -17,14 +17,14 @@ export default (state = initialGroceries, action) => {
     case types.ADDING_GROCERY_ITEM:
       return {
         ...state,
-        isAdding: action.isAdding
+        makingAjaxRequest: action.isAdding
       };
     case types.ADD_GROCERY_ITEM_SUCCESS:
       return {
         ...state,
         groceries: [
           ...action.grocery,
-          ...state.groceries.slice(0, state.groceries.length - 1),
+          ...state.groceries.slice(0, 7),
         ]
       };
     case types.ADD_GROCERY_ITEM_FAILURE:
@@ -49,6 +49,26 @@ export default (state = initialGroceries, action) => {
         ]
       };
     case types.UPDATE_GROCERY_ITEM_FAILURE:
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          ...action.error
+        }
+      };
+    case types.DELETING_GROCERY_ITEM:
+      return {
+        ...state,
+        makingAjaxRequest: action.isDeleting
+      };
+    case types.DELETE_GROCERY_ITEM_SUCCESS:
+      return {
+        ...state,
+        groceries: [
+          ...state.groceries.filter(grocery => grocery._id !== action.id)
+        ]
+      };
+    case types.DELETE_GROCERY_ITEM_FAILURE:
       return {
         ...state,
         error: {

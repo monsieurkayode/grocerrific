@@ -7,7 +7,12 @@ import {
 import InventoryListItem from './InventoryListItem';
 import Loader from '../common/Loader';
 
-const InventoryList = ({ openModal, groceries, loading }) => (
+const InventoryList = ({
+  openModal,
+  openDeleteModal,
+  groceries,
+  loading
+}) => (
   <div className="inventory__list">
     {loading && <Loader size={60} />}
     {!loading && (
@@ -19,13 +24,19 @@ const InventoryList = ({ openModal, groceries, loading }) => (
       </div>)
     }
     {!loading && groceries.map(grocery => (
-      <InventoryListItem key={grocery._id} openModal={openModal} {...grocery} />
+      <InventoryListItem
+        key={grocery._id}
+        openModal={openModal}
+        openDeleteModal={openDeleteModal}
+        {...grocery}
+      />
     ))}
   </div>
 );
 
 InventoryList.propTypes = {
   openModal: func.isRequired,
+  openDeleteModal: func.isRequired,
   groceries: arrayOf(shape({})).isRequired,
   loading: bool.isRequired
 };
