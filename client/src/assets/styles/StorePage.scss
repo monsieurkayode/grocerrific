@@ -48,7 +48,9 @@
     .grocery__list {
       @extend %flex__container_row;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
+      width: 95%;
+      margin-left: auto;
 
       .grocery__list_item {
         flex: 1 0 30%;

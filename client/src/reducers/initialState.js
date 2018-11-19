@@ -1,6 +1,6 @@
 export const initialGroceries = {
   isLoading: false,
-  isAdding: false,
+  makingAjaxRequest: false,
   groceries: [],
   error: {}
 };

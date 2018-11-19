@@ -50,5 +50,11 @@
         transform: scale(1.2);
       }
     }
+
+    .notice {
+      margin: 20px auto;
+      color: tomato;
+      font-family: $font-family-roboto;
+    }
   }
 }

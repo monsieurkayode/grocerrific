@@ -10,7 +10,8 @@ import {
   removeGroceryFromCart,
   addGroceryItem,
   setError,
-  updateGroceryItem
+  updateGroceryItem,
+  deleteGroceryItem
 } from '../../actions/groceryActions';
 import { validateForm } from '../../../../shared/validator';
 import { toastError } from '../../helpers/toaster';
@@ -19,6 +20,7 @@ import Cart from '../Store/Cart';
 import Header from '../common/Header';
 import InventoryList from './InventoryList';
 import ManageInventoryItem from './ManageInventoryItem';
+import DeleteModal from './DeleteModal';
 
 class InventoryPage extends Component {
   static propTypes = {
@@ -28,7 +30,7 @@ class InventoryPage extends Component {
     groceries: arrayOf(shape({})).isRequired,
     cartItems: arrayOf(shape({})).isRequired,
     isLoading: bool.isRequired,
-    isAdding: bool.isRequired,
+    makingAjaxRequest: bool.isRequired,
     error: shape({}).isRequired,
     setError: func.isRequired,
     updateGroceryItem: func.isRequired
@@ -37,12 +39,14 @@ class InventoryPage extends Component {
   static initialState = () => ({
     displayModal: false,
     displayCart: false,
+    displayDeleteModal: false,
     groceryItem: {
       id: '',
       name: '',
       price: '',
       quantity: ''
     },
+    modalContent: {},
     errors: {}
   })
 
@@ -55,7 +59,8 @@ class InventoryPage extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.displayModal || nextState.displayCart) {
+    const { displayCart, displayDeleteModal, displayModal } = nextState;
+    if (displayModal || displayCart || displayDeleteModal) {
       this.rootRef.current.parentNode.style.overflow = 'hidden';
     } else {
       this.rootRef.current.parentNode.style.overflow = '';
@@ -81,8 +86,14 @@ class InventoryPage extends Component {
     }));
   }
 
+  openDeleteModal = (modalContent) => {
+    this.setState(prevState => ({
+      displayDeleteModal: !prevState.displayDeleteModal,
+      modalContent
+    }));
+  }
+
   closeModal = () => {
-    this.toggleModal();
     this.setState({ ...InventoryPage.initialState() });
   }
 
@@ -116,6 +127,14 @@ class InventoryPage extends Component {
     this.setState({ errors });
   }
 
+  handleDelete = (id) => {
+    this.props.deleteGroceryItem(id)
+      .then(() => {
+        this.props.fetchGroceries();
+        this.setState({ ...InventoryPage.initialState() });
+      });
+  }
+
   handleFocus = (event) => {
     const { errors } = this.state;
     errors[event.target.name] = '';
@@ -126,7 +145,9 @@ class InventoryPage extends Component {
     const {
       displayModal,
       displayCart,
+      displayDeleteModal,
       groceryItem,
+      modalContent,
       errors
     } = this.state;
 
@@ -134,7 +155,7 @@ class InventoryPage extends Component {
       groceries,
       cartItems,
       isLoading,
-      isAdding
+      makingAjaxRequest
     } = this.props;
 
     return (
@@ -172,6 +193,7 @@ class InventoryPage extends Component {
           </div>
           <InventoryList
             openModal={this.openEditModal}
+            openDeleteModal={this.openDeleteModal}
             groceries={groceries}
             loading={isLoading}
           />
@@ -184,7 +206,7 @@ class InventoryPage extends Component {
             handleInputChange={this.handleInputChange}
             handleSubmit={this.handleSubmit}
             handleFocus={this.handleFocus}
-            saving={isAdding}
+            saving={makingAjaxRequest}
             errors={errors}
           />)
         }
@@ -195,6 +217,16 @@ class InventoryPage extends Component {
             removeFromCart={this.props.removeGroceryFromCart}
           />)
         }
+        {
+          displayDeleteModal && (
+            <DeleteModal
+              {...modalContent}
+              deleting={makingAjaxRequest}
+              closeModal={this.closeModal}
+              handleDelete={this.handleDelete}
+            />
+          )
+        }
       </main>
     );
   }
@@ -202,7 +234,7 @@ class InventoryPage extends Component {
 
 const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
-  isAdding: allGroceries.isAdding,
+  makingAjaxRequest: allGroceries.makingAjaxRequest,
   error: allGroceries.error,
   groceries: allGroceries.groceries,
   cartItems: allCartItems.cartItems
@@ -213,5 +245,6 @@ export default connect(mapStateToProps, {
   removeGroceryFromCart,
   addGroceryItem,
   setError,
-  updateGroceryItem
+  updateGroceryItem,
+  deleteGroceryItem
 })(InventoryPage);

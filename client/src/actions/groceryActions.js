@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from './actionTypes';
-import { toastSuccess } from '../helpers/toaster';
+import { toastSuccess, toastError } from '../helpers/toaster';
 
 const baseUrl = '/api/v1/groceries';
 
@@ -108,5 +108,36 @@ export const updateGroceryItem = formData => async (dispatch) => {
     const { data } = error.response;
     dispatch(updateGroceryItemFailure(data));
     dispatch(addingGroceryItem(false));
+  }
+};
+
+const deletingGroceryItem = isDeleting => ({
+  type: types.DELETING_GROCERY_ITEM,
+  isDeleting
+});
+
+const deleteGroceryItemFailure = error => ({
+  type: types.DELETE_GROCERY_ITEM_FAILURE,
+  error
+});
+
+const deleteGroceryItemSuccess = id => ({
+  type: types.DELETE_GROCERY_ITEM_SUCCESS,
+  id
+});
+
+export const deleteGroceryItem = id => async (dispatch) => {
+  dispatch(deletingGroceryItem(true));
+  try {
+    const response = await axios.delete(`${baseUrl}/${id}`);
+    const { message } = response.data;
+    dispatch(deleteGroceryItemSuccess(id));
+    dispatch(deletingGroceryItem(false));
+    toastSuccess(message);
+  } catch (error) {
+    const { data } = error.response;
+    dispatch(deleteGroceryItemFailure(data));
+    dispatch(deletingGroceryItem(false));
+    toastError(data.message);
   }
 };
