@@ -7,15 +7,18 @@ import {
 } from 'prop-types';
 import {
   fetchGroceries,
-  removeGroceryFromCart,
   addGroceryItem,
   setError,
   updateGroceryItem,
   deleteGroceryItem
 } from '../../actions/groceryActions';
+import {
+  removeGroceryFromCart,
+  checkout,
+  clearGroceryCart
+} from '../../actions/cartActions';
 import { validateForm } from '../../../../shared/validator';
-import { toastError } from '../../helpers/toaster';
-
+import { toastError, toastWarning } from '../../helpers/toaster';
 import Cart from '../Store/Cart';
 import Header from '../common/Header';
 import InventoryList from './InventoryList';
@@ -33,13 +36,16 @@ class InventoryPage extends Component {
     makingAjaxRequest: bool.isRequired,
     error: shape({}).isRequired,
     setError: func.isRequired,
-    updateGroceryItem: func.isRequired
+    updateGroceryItem: func.isRequired,
+    checkout: func.isRequired,
+    checkingOut: bool.isRequired
   }
 
   static initialState = () => ({
     displayModal: false,
     displayCart: false,
     displayDeleteModal: false,
+    orderProcessed: false,
     groceryItem: {
       id: '',
       name: '',
@@ -61,10 +67,14 @@ class InventoryPage extends Component {
   componentWillUpdate(nextProps, nextState) {
     const { displayCart, displayDeleteModal, displayModal } = nextState;
     if (displayModal || displayCart || displayDeleteModal) {
-      this.rootRef.current.parentNode.style.overflow = 'hidden';
+      this.togglePageScroll('hidden');
     } else {
-      this.rootRef.current.parentNode.style.overflow = '';
+      this.togglePageScroll('');
     }
+  }
+
+  togglePageScroll = (overflow) => {
+    this.rootRef.current.parentNode.style.overflow = overflow;
   }
 
   toggleModal = () => {
@@ -81,9 +91,19 @@ class InventoryPage extends Component {
   }
 
   openCartModal = () => {
-    this.setState(prevState => ({
-      displayCart: !prevState.displayCart
-    }));
+    this.setState((prevState) => {
+      if (prevState.orderProcessed) {
+        this.props.clearGroceryCart();
+        this.props.fetchGroceries();
+        return {
+          displayCart: !prevState.displayCart,
+          orderProcessed: !prevState.orderProcessed
+        };
+      }
+      return {
+        displayCart: !prevState.displayCart
+      };
+    });
   }
 
   openDeleteModal = (modalContent) => {
@@ -135,6 +155,16 @@ class InventoryPage extends Component {
       });
   }
 
+  handleCheckout = (cart) => {
+    if (cart.length === 0) {
+      return toastWarning('Grocery Cart is empty');
+    }
+    this.props.checkout(cart)
+      .then(() => {
+        this.setState({ orderProcessed: true });
+      });
+  }
+
   handleFocus = (event) => {
     const { errors } = this.state;
     errors[event.target.name] = '';
@@ -155,7 +185,8 @@ class InventoryPage extends Component {
       groceries,
       cartItems,
       isLoading,
-      makingAjaxRequest
+      makingAjaxRequest,
+      checkingOut
     } = this.props;
 
     return (
@@ -215,6 +246,8 @@ class InventoryPage extends Component {
             closeModal={this.openCartModal}
             cartItems={cartItems}
             removeFromCart={this.props.removeGroceryFromCart}
+            checkout={this.handleCheckout}
+            checkingOut={checkingOut}
           />)
         }
         {
@@ -237,7 +270,8 @@ const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   makingAjaxRequest: allGroceries.makingAjaxRequest,
   error: allGroceries.error,
   groceries: allGroceries.groceries,
-  cartItems: allCartItems.cartItems
+  cartItems: allCartItems.cartItems,
+  checkingOut: allCartItems.checkingOut
 });
 
 export default connect(mapStateToProps, {
@@ -246,5 +280,7 @@ export default connect(mapStateToProps, {
   addGroceryItem,
   setError,
   updateGroceryItem,
-  deleteGroceryItem
+  deleteGroceryItem,
+  checkout,
+  clearGroceryCart
 })(InventoryPage);

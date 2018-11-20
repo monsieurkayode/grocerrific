@@ -35,6 +35,22 @@ export default (state = initialCartItems, action) => {
           )
         ]
       };
+    case types.CHECKING_OUT:
+      return {
+        ...state,
+        checkingOut: action.isCheckingOut
+      };
+    case types.CHECKOUT_SUCCESS:
+      return {
+        ...state,
+        checkoutStatus: action.checkoutStatus
+      };
+    case types.CLEAR_GROCERY_CART:
+      return {
+        ...state,
+        checkoutStatus: [],
+        cartItems: []
+      };
     default:
       return state;
   }

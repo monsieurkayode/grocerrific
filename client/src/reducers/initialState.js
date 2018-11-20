@@ -7,5 +7,6 @@ export const initialGroceries = {
 
 export const initialCartItems = {
   checkingOut: false,
-  cartItems: []
+  cartItems: [],
+  checkoutStatus: []
 };

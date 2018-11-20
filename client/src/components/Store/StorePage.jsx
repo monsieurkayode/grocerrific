@@ -4,11 +4,15 @@ import { Link } from 'react-router-dom';
 import {
   func, arrayOf, shape, bool
 } from 'prop-types';
+import { ToastContainer } from 'react-toastify';
+import { fetchGroceries } from '../../actions/groceryActions';
 import {
-  fetchGroceries,
   addGroceryToCart,
-  removeGroceryFromCart
-} from '../../actions/groceryActions';
+  removeGroceryFromCart,
+  checkout,
+  clearGroceryCart
+} from '../../actions/cartActions';
+import { toastWarning } from '../../helpers/toaster';
 
 import Header from '../common/Header';
 import GroceryItemList from './GroceryItemList';
@@ -21,28 +25,74 @@ class StorePage extends Component {
     cartItems: arrayOf(shape({})).isRequired,
     isLoading: bool.isRequired,
     addGroceryToCart: func.isRequired,
-    removeGroceryFromCart: func.isRequired
+    removeGroceryFromCart: func.isRequired,
+    checkout: func.isRequired,
+    checkingOut: bool.isRequired,
+    clearGroceryCart: func.isRequired
   }
 
   state = {
-    displayModal: false
+    displayModal: false,
+    orderProcessed: false
   }
+
+  rootRef = React.createRef();
 
   componentDidMount() {
     this.props.fetchGroceries();
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    const { displayModal } = nextState;
+    if (displayModal) {
+      this.togglePageScroll('hidden');
+    } else {
+      this.togglePageScroll('');
+    }
+  }
+
+  togglePageScroll = (overflow) => {
+    this.rootRef.current.parentNode.style.overflow = overflow;
+  }
+
   toggleModal = () => {
-    this.setState(prevState => ({
-      displayModal: !prevState.displayModal
-    }));
+    this.setState((prevState) => {
+      if (prevState.orderProcessed) {
+        this.props.clearGroceryCart();
+        this.props.fetchGroceries();
+        return {
+          displayModal: !prevState.displayModal,
+          orderProcessed: !prevState.orderProcessed
+        };
+      }
+      return {
+        displayModal: !prevState.displayModal
+      };
+    });
+  }
+
+  handleCheckout = (cart) => {
+    if (cart.length === 0) {
+      return toastWarning('Grocery Cart is empty');
+    }
+    this.props.checkout(cart)
+      .then(() => {
+        this.setState({ orderProcessed: true });
+      });
   }
 
   render() {
     const { displayModal } = this.state;
-    const { groceries, isLoading, cartItems } = this.props;
+    const {
+      groceries,
+      isLoading,
+      cartItems,
+      checkingOut
+    } = this.props;
+
     return (
-      <main id="store" className="container">
+      <main ref={this.rootRef} id="store" className="container">
+        <ToastContainer />
         <Header>
           <div className="header__right">
             <Link to="/inventory">
@@ -74,6 +124,8 @@ class StorePage extends Component {
             closeModal={this.toggleModal}
             cartItems={cartItems}
             removeFromCart={this.props.removeGroceryFromCart}
+            checkout={this.handleCheckout}
+            checkingOut={checkingOut}
           />
         )}
       </main>
@@ -84,13 +136,16 @@ class StorePage extends Component {
 const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
   groceries: allGroceries.groceries,
-  cartItems: allCartItems.cartItems
+  cartItems: allCartItems.cartItems,
+  checkingOut: allCartItems.checkingOut
 });
 
 export default connect(
   mapStateToProps, {
     fetchGroceries,
     addGroceryToCart,
-    removeGroceryFromCart
+    removeGroceryFromCart,
+    checkout,
+    clearGroceryCart
   }
 )(StorePage);

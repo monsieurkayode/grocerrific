@@ -14,9 +14,15 @@ export const toastError = (message) => {
   });
 };
 
+export const toastInfo = (message) => {
+  toast.info(message, {
+    position: toast.POSITION.TOP_CENTER
+  });
+};
+
 export const toastWarning = (message) => {
   toast.dismiss();
-  toast.warn(message, {
+  toast.warning(message, {
     position: toast.POSITION.TOP_CENTER
   });
 };

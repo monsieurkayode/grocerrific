@@ -5,7 +5,7 @@ export const groceryItems = [
   {
     name: 'Power Oil',
     price: 1500,
-    quantity: 34
+    quantity: 0
   },
   {
     name: 'Prawn Crackers',
