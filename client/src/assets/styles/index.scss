@@ -106,3 +106,17 @@ button:disabled {
 .clear {
   clear: both;
 }
+
+.no-content {
+  text-align: center;
+
+  i {
+    color: #4d75a1;
+    font-size: 80px;
+  }
+  
+  .no-content-info {
+    color: $light-grey-6;
+    font-family: $font-family-roboto;
+  }
+}

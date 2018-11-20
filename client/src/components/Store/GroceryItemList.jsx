@@ -6,6 +6,7 @@ import {
 
 import GroceryItem from './GroceryItem';
 import Loader from '../common/Loader';
+import NoContent from '../common/NoContent';
 
 const GroceryItemList = ({
   groceries,
@@ -17,6 +18,10 @@ const GroceryItemList = ({
   <section id="grocery__display">
     {loading && <Loader size={60} />}
     <div className="grocery__list">
+      {!loading && groceries.length === 0 && (
+      <NoContent
+        content="There are no groceries available now. Check back later :-("
+      />)}
       {!loading
         && groceries
           .map(grocery => (

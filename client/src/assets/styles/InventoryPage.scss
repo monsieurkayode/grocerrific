@@ -3,6 +3,10 @@
   @extend %nowrap;
   min-height: 100%;
 
+  .no-content {
+    width: 100%;
+  }
+
   header {
     @include header();
     padding: px-to-rem(10px) 0;
