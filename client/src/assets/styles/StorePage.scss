@@ -36,7 +36,19 @@
 
   header {
     @include header();
-    padding: px-to-rem(10px) 0;
+    background: #826cb3;
+    margin: 0 auto;
+    position: fixed;
+    width: 100%;
+    padding: px-to-rem(12px) px-to-rem(60px);
+    z-index: 5;
+    box-shadow: 0px 2px 10px 2px $light-grey-2;
+
+    .header__right {
+      .start {
+        border: 2px solid #fff;
+      }
+    }
   }
 
   .no-content {
@@ -48,6 +60,7 @@
     @extend %flex__container_column;
     background: #f6f6f6;
     padding: 50px 0;
+    margin-top: px-to-rem(60px);
 
     .grocery__list {
       @extend %flex__container_row;

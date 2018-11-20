@@ -22,8 +22,7 @@
   justify-content: space-between;
   align-items: center;
   background: transparent;
-  margin: 0 px-to-rem(60px);
-  padding: px-to-rem(20px) 0;
+  padding: px-to-rem(20px) px-to-rem(60px);
   min-height: 60px;
   user-select: none;
 
@@ -44,6 +43,7 @@
       font-size: px-to-rem(22px);
       text-shadow: 1px 2px 8px rgba(78, 45, 126, 0.3);
       cursor: pointer;
+      outline: none;
 
       sup {
         font-weight: 400;

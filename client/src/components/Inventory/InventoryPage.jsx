@@ -62,6 +62,7 @@ class InventoryPage extends Component {
 
   componentDidMount() {
     this.props.fetchGroceries();
+    this.rootRef.current.parentNode.parentNode.style.background = '#F6F6F6';
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -71,6 +72,10 @@ class InventoryPage extends Component {
     } else {
       this.togglePageScroll('');
     }
+  }
+
+  componentWillUnmount() {
+    this.rootRef.current.parentNode.parentNode.style.background = '';
   }
 
   togglePageScroll = (overflow) => {

@@ -70,8 +70,8 @@ button:disabled {
 
   .cart__count {
     display: inline-block;
-    background: #4d75a1;
-    color: #f6f6f6;
+    background: #F6F6F6;
+    color: #4d75a1;
     transform: translateY(-10px);
     padding: 1px 10px;
     border-radius: 100px;
@@ -87,12 +87,12 @@ button:disabled {
     color: transparent;
     font-size: 30px;
     vertical-align: middle;
-    -webkit-text-stroke-color: #4d75a1;
+    -webkit-text-stroke-color: #FFF;
     -webkit-text-stroke-width: 1.2px;
-    transition: all .2s ease-in;
+    transition: all .5s ease-in;
 
     &:hover {
-      -webkit-text-stroke-color: #FFF;
+      -webkit-text-fill-color: #F6F6F6;
     }
   }
 }

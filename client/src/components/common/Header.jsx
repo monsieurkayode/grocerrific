@@ -1,13 +1,21 @@
 import React from 'react';
-import { node } from 'prop-types';
+import { node, shape } from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import logo from '../../assets/images/shoping_cart.png';
 
-const Header = ({ children }) => (
+const Header = ({ children, history }) => (
   <header>
     <div className="header__left">
       <img id="logo" src={logo} alt="Brand" />
-      <div id="brand" className="text__bold">
+      <div
+        onKeyPress={() => {}}
+        role="link"
+        tabIndex="0"
+        id="brand"
+        className="text__bold"
+        onClick={() => history.push('/')}
+      >
         Grocerrific<sup>&trade;</sup>
       </div>
     </div>
@@ -16,7 +24,8 @@ const Header = ({ children }) => (
 );
 
 Header.propTypes = {
-  children: node.isRequired
+  children: node.isRequired,
+  history: shape({}).isRequired
 };
 
-export default Header;
+export default withRouter(Header);
