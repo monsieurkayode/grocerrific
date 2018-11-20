@@ -89,36 +89,40 @@ export const checkoutCart = async (req, res) => {
 
   if (cart.length === 0) return errorHandler(422, 'Your cart is empty', res);
 
-  await Promise.all(cart.map(async (item) => {
-    await GroceryItem.findById(item.id, (err, grocery) => {
-      let response;
-      if (!grocery) {
-        response = {
-          id: item.id,
-          status: 'fail',
-          message: 'Grocery Item not available',
-        };
-      }
-      if (grocery && (grocery.quantity - item.quantity) < 0) {
-        response = {
-          id: item.id,
-          status: 'fail',
-          message: `Only ${grocery.quantity} ${grocery.name} available`,
-        };
-      }
-      if (grocery && (grocery.quantity - item.quantity) >= 0) {
-        response[item.id] = {
-          id: item.id,
-          status: 'ok',
-          message: 'Item order has been processed'
-        };
-        grocery.updateOne({ $inc: { quantity: -item.quantity } }, () => {});
-      }
-      checkoutStatus.push(response);
+  try {
+    await Promise.all(cart.map(async (item) => {
+      await GroceryItem.findById(item.id, (err, grocery) => {
+        let response = {};
+        if (!grocery) {
+          response = {
+            id: item.id,
+            status: 'fail',
+            message: 'Grocery Item not available',
+          };
+        }
+        if (grocery && (grocery.quantity - item.quantity) < 0) {
+          response = {
+            id: item.id,
+            status: 'fail',
+            message: `Only ${grocery.quantity} ${grocery.name} available`,
+          };
+        }
+        if (grocery && (grocery.quantity - item.quantity) >= 0) {
+          response = {
+            id: item.id,
+            status: 'ok',
+            message: 'Item order has been processed'
+          };
+          grocery.updateOne({ $inc: { quantity: -item.quantity } }, () => {});
+        }
+        checkoutStatus.push(response);
+      });
+    }));
+    return res.status(200).send({
+      status: STATUS_CODES[200],
+      checkoutStatus
     });
-  }));
-  return res.status(200).send({
-    status: STATUS_CODES[200],
-    checkoutStatus
-  });
+  } catch (error) {
+    return errorHandler(500, 'An error occured!', res);
+  }
 };

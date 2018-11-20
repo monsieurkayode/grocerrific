@@ -34,21 +34,6 @@ export const fetchGroceries = () => async (dispatch) => {
   }
 };
 
-export const addGroceryToCart = grocery => dispatch => dispatch({
-  type: types.ADD_GROCERY_TO_CART,
-  grocery
-});
-
-export const removeGroceryFromCart = id => dispatch => dispatch({
-  type: types.REMOVE_GROCERY_FROM_CART,
-  id
-});
-
-export const updateCartItemQuantity = cartItem => dispatch => dispatch({
-  type: types.UPDATE_CART_ITEM_QUANTITY,
-  cartItem
-});
-
 const addingGroceryItem = isAdding => ({
   type: types.ADDING_GROCERY_ITEM,
   isAdding

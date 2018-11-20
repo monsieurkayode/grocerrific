@@ -1,5 +1,10 @@
 import React from 'react';
-import { func, shape, arrayOf } from 'prop-types';
+import {
+  func,
+  shape,
+  arrayOf,
+  bool
+} from 'prop-types';
 
 import Modal from '../common/Modal';
 import CartItem from './CartItem';
@@ -7,7 +12,9 @@ import CartItem from './CartItem';
 const Cart = ({
   closeModal,
   cartItems,
-  removeFromCart
+  removeFromCart,
+  checkout,
+  checkingOut
 }) => {
   const computeTotal = () => (
     cartItems.reduce(
@@ -27,6 +34,7 @@ const Cart = ({
             removeFromCart={removeFromCart}
             {...cartItem}
             cartItems={cartItems}
+            checkingOut={checkingOut}
           />
         ))}
       </div>
@@ -35,7 +43,14 @@ const Cart = ({
         <span className="total-price">&#8358;{computeTotal()}</span>
       </div>
       <div className="checkout__button">
-        <button className="buy uppercase" type="button">Checkout</button>
+        <button
+          className="buy uppercase"
+          type="button"
+          onClick={() => checkout(cartItems)}
+          disabled={checkingOut}
+        >
+          {checkingOut ? 'Processing...' : 'Checkout'}
+        </button>
       </div>
     </Modal>
   );
@@ -45,6 +60,8 @@ const Cart = ({
 Cart.propTypes = {
   closeModal: func.isRequired,
   removeFromCart: func.isRequired,
+  checkout: func.isRequired,
+  checkingOut: bool.isRequired,
   cartItems: arrayOf(shape({})).isRequired
 };
 

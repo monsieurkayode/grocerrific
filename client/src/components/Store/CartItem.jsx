@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  string, number, func, arrayOf, shape
+  string,
+  number,
+  func,
+  arrayOf,
+  shape,
+  bool
 } from 'prop-types';
-import { updateCartItemQuantity } from '../../actions/groceryActions';
+import { updateCartItemQuantity } from '../../actions/cartActions';
 
 class CartItem extends Component {
   static propTypes = {
@@ -13,10 +18,14 @@ class CartItem extends Component {
     maxQuantity: number.isRequired,
     removeFromCart: func.isRequired,
     updateCartItemQuantity: func.isRequired,
-    cartItems: arrayOf(shape({})).isRequired
+    checkingOut: bool.isRequired,
+    cartItems: arrayOf(shape({})).isRequired,
+    checkoutStatus: arrayOf(shape({})).isRequired,
   }
 
-  state = { orderQuantity: 1 }
+  state = {
+    orderQuantity: 1
+  }
 
   componentDidMount() {
     const { cartItems, id } = this.props;
@@ -97,54 +106,76 @@ class CartItem extends Component {
       price,
       removeFromCart,
       maxQuantity,
-      cartItems
+      cartItems,
+      checkingOut,
+      checkoutStatus
     } = this.props;
 
     const { orderQuantity } = this.state;
     const { quantity } = cartItems.find(item => item.id === id);
 
+    let status = '';
+    let message = '';
+    const itemOrderStatus = checkoutStatus.find(item => item.id === id);
+    if (itemOrderStatus) {
+      status = itemOrderStatus.status; // eslint-disable-line
+      message = itemOrderStatus.message; // eslint-disable-line
+    }
+
     return (
-      <div className="checkout-item-wrapper">
-        <p className="item-name">{name}</p>
-        <span className="order">
-          <button
-            className="inc"
-            type="button"
-            onClick={this.decrementQuantity}
-            disabled={Number(orderQuantity) === 1}
+      <div className="cart-item-container">
+        <div className="checkout-item-wrapper">
+          <p className="item-name">{name}</p>
+          <span className="order">
+            <button
+              className="inc"
+              type="button"
+              onClick={this.decrementQuantity}
+              disabled={Number(orderQuantity) === 1 || checkingOut}
+            >
+              -
+            </button>
+            <input
+              name="orderQuantity"
+              className="quantity"
+              type="number"
+              value={orderQuantity}
+              onChange={this.handleInputChange}
+              onBlur={this.revertInvalidQuantity}
+              disabled={checkingOut}
+            />
+            <button
+              className="dec"
+              type="button"
+              onClick={this.incrementQuantity}
+              disabled={Number(orderQuantity) === maxQuantity || checkingOut}
+            >
+              +
+            </button>
+          </span>
+          <span className="price">&#8358;{quantity * price}</span>
+          <span
+            onKeyPress={() => {}}
+            role="button"
+            tabIndex="0"
+            onClick={() => removeFromCart(id)}
+            className="remove"
           >
-            -
-          </button>
-          <input
-            name="orderQuantity"
-            className="quantity"
-            type="number"
-            value={orderQuantity}
-            onChange={this.handleInputChange}
-            onBlur={this.revertInvalidQuantity}
-          />
-          <button
-            className="dec"
-            type="button"
-            onClick={this.incrementQuantity}
-            disabled={Number(orderQuantity) === maxQuantity}
-          >
-            +
-          </button>
-        </span>
-        <span className="price">&#8358;{quantity * price}</span>
-        <span
-          onKeyPress={() => {}}
-          role="button"
-          tabIndex="0"
-          onClick={() => removeFromCart(id)}
-          className="remove"
+            &times;
+          </span>
+        </div>
+        <div
+          className={`checkout-status ${status === 'ok' ? 'success' : 'error'}`}
         >
-          &times;
-        </span>
+          <p>{message}&nbsp;</p>
+        </div>
       </div>
     );
   }
 }
 
-export default connect(null, { updateCartItemQuantity })(CartItem);
+const mapStateToProps = ({ allCartItems }) => ({
+  checkoutStatus: allCartItems.checkoutStatus
+});
+
+export default connect(mapStateToProps, { updateCartItemQuantity })(CartItem);

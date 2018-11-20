@@ -16,7 +16,7 @@
     "build:client:prod": "webpack --config webpack.config.prod.js",
     "prebuild:dev": "rm -rf dist",
     "prebuild:prod": "rm -rf dist",
-    "build:server": "babel --presets env shared -d dist/shared/ && babel --presets env server -d dist/server/ --watch",
+    "build:server": "babel --presets env shared -d dist/shared/ && babel --presets env server -d dist/server/",
     "build:dev": "concurrently \"yarn build:client:dev\" \"yarn build:server\"",
     "build:prod": "concurrently \"yarn build:client:prod\" \"yarn build:server\"",
     "heroku-postbuild": "yarn build:prod",
