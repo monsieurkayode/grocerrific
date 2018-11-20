@@ -45,7 +45,7 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
 app.use(compression());
-app.use(express.static('../dist'));
+app.use(express.static(resolve(__dirname, '../../dist/client')));
 app.use(
   '/favicon.ico',
   favicon(resolve(__dirname, '../client/favicon.ico'))
