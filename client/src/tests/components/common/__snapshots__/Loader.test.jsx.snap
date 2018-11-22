@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader Component renders correctly 1`] = `
+<div
+  className="loader"
+>
+  <PreloaderIcon
+    className=""
+    duration={1200}
+    loader={[Function]}
+    size={20}
+    strokeColor="#4d75a1"
+    strokeWidth={12}
+    style={Object {}}
+    unit="px"
+  />
+</div>
+`;

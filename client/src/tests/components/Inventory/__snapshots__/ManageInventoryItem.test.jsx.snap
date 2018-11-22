@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManageInventoryItem Component renders correctly 1`] = `
+<Modal
+  closeModal={[MockFunction]}
+  title="Add Grocery"
+>
+  <form
+    className="inventory__form"
+    onSubmit={[MockFunction]}
+  >
+    <TextField
+      error=""
+      field="form-field"
+      label="Name"
+      name="name"
+      onChange={[MockFunction]}
+      onFocus={[MockFunction]}
+      placeholder="Tomato"
+      type="text"
+      value=""
+    />
+    <div
+      className="form-field bottom"
+    >
+      <TextField
+        error=""
+        field="inline__field"
+        label="Price"
+        name="price"
+        onChange={[MockFunction]}
+        onFocus={[MockFunction]}
+        placeholder="345"
+        type="number"
+        value=""
+      />
+      <TextField
+        error=""
+        field="inline__field"
+        label="Quantity"
+        name="quantity"
+        onChange={[MockFunction]}
+        onFocus={[MockFunction]}
+        placeholder="17"
+        type="number"
+        value=""
+      />
+    </div>
+    <button
+      className="buy uppercase clear"
+      disabled={false}
+      type="submit"
+    >
+      Add
+    </button>
+  </form>
+</Modal>
+`;

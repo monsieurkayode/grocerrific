@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField Component renders correctly 1`] = `
+<TextField
+  error=""
+  field=""
+  label=""
+  name=""
+  onChange={[MockFunction]}
+  onFocus={[MockFunction]}
+  placeholder=""
+  type="text"
+  value=""
+>
+  <div
+    className=""
+  >
+    <label
+      htmlFor=""
+    >
+       
+      <span>
+        *
+      </span>
+    </label>
+    <input
+      className=""
+      name=""
+      onChange={[MockFunction]}
+      onFocus={[MockFunction]}
+      placeholder=""
+      type="text"
+      value=""
+    />
+    <div
+      className="error"
+      style={
+        Object {
+          "visibility": "hidden",
+        }
+      }
+    >
+       
+    </div>
+  </div>
+</TextField>
+`;

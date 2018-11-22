@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as types from './actionTypes';
 import { toastSuccess, toastError } from '../helpers/toaster';
 
-const baseUrl = '/api/v1/groceries';
+export const baseUrl = '/api/v1/groceries';
 
 const fetchGroceriesLoading = isLoading => ({
   type: types.FETCH_GROCERIES_LOADING,

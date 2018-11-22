@@ -4,12 +4,11 @@ import { withRouter } from 'react-router-dom';
 
 import logo from '../../assets/images/shoping_cart.png';
 
-const Header = ({ children, history }) => (
+export const Header = ({ children, history }) => (
   <header>
     <div className="header__left">
       <img id="logo" src={logo} alt="Brand" />
       <div
-        onKeyPress={() => {}}
         role="link"
         tabIndex="0"
         id="brand"

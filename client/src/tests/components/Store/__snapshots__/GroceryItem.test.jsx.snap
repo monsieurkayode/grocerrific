@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroceryItem Component renders correctly 1`] = `
+<div
+  className="grocery__list_item"
+>
+  <div
+    className="image__wrapper effect"
+  >
+    <img
+      alt=""
+      src="test-file-mock"
+    />
+  </div>
+  <article
+    className="grocery__info"
+  >
+    <h3
+      className="grocery__name"
+    >
+      mamador
+      <span
+        className="grocery__price"
+      >
+        ₦
+        1250
+      </span>
+    </h3>
+    <div
+      className="grocery__buttons"
+    >
+      <button
+        className="add uppercase"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Add to cart
+      </button>
+    </div>
+  </article>
+</div>
+`;

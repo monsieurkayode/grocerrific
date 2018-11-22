@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InventoryList Component renders correctly 1`] = `
+<div
+  className="inventory__list"
+>
+  <div
+    className="table-header"
+  >
+    <div
+      className="name"
+    >
+      Name
+    </div>
+    <div>
+      Price
+    </div>
+    <div>
+      Stock
+    </div>
+    <div
+      className="action"
+    >
+       
+    </div>
+  </div>
+  <InventoryListItem
+    _id="5bf4754223602e00211d6587"
+    key="5bf4754223602e00211d6587"
+    name="mamador"
+    openDeleteModal={[MockFunction]}
+    openModal={[MockFunction]}
+    price={1250}
+    quantity={3}
+  />
+  <InventoryListItem
+    _id="5bf4754223602e00211d6588"
+    key="5bf4754223602e00211d6588"
+    name="sausage"
+    openDeleteModal={[MockFunction]}
+    openModal={[MockFunction]}
+    price={120}
+    quantity={12}
+  />
+  <InventoryListItem
+    _id="5bf4754223602e00211d6589"
+    key="5bf4754223602e00211d6589"
+    name="salad creme"
+    openDeleteModal={[MockFunction]}
+    openModal={[MockFunction]}
+    price={1500}
+    quantity={0}
+  />
+</div>
+`;

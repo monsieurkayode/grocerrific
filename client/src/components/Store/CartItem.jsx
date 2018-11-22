@@ -10,7 +10,7 @@ import {
 } from 'prop-types';
 import { updateCartItemQuantity } from '../../actions/cartActions';
 
-class CartItem extends Component {
+export class CartItem extends Component {
   static propTypes = {
     id: string.isRequired,
     name: string.isRequired,
@@ -155,7 +155,6 @@ class CartItem extends Component {
           </span>
           <span className="price">&#8358;{quantity * price}</span>
           <span
-            onKeyPress={() => {}}
             role="button"
             tabIndex="0"
             onClick={() => removeFromCart(id)}
@@ -174,7 +173,7 @@ class CartItem extends Component {
   }
 }
 
-const mapStateToProps = ({ allCartItems }) => ({
+export const mapStateToProps = ({ allCartItems }) => ({
   checkoutStatus: allCartItems.checkoutStatus
 });
 

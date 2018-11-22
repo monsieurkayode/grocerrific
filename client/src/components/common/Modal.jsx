@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { node, string, func } from 'prop-types';
 
@@ -7,7 +8,6 @@ const Modal = ({ children, title, closeModal }) => (
       <div className="heading">
         <h2>{ title }
           <span
-            onKeyPress={() => {}}
             role="button"
             tabIndex="0"
             onClick={() => closeModal()}
