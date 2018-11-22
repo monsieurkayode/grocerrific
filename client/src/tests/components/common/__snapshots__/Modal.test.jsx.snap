@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component should render correctly 1`] = `
+<div
+  className="modal"
+>
+  <div
+    className="modal__main"
+  >
+    <div
+      className="heading"
+    >
+      <h2>
+        grocery cart
+        <span
+          className="close"
+          onClick={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          ×
+        </span>
+      </h2>
+    </div>
+    <p>
+      Hello
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component renders correctly 1`] = `
+<header>
+  <div
+    className="header__left"
+  >
+    <img
+      alt="Brand"
+      id="logo"
+      src="test-file-mock"
+    />
+    <div
+      className="text__bold"
+      id="brand"
+      onClick={[Function]}
+      role="link"
+      tabIndex="0"
+    >
+      Grocerrific
+      <sup>
+        ™
+      </sup>
+    </div>
+  </div>
+  <p>
+    Header
+  </p>
+</header>
+`;

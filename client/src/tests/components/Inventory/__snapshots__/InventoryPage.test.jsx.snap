@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InventoryPage Component renders correctly 1`] = `
+<main
+  className="container"
+  id="inventory"
+>
+  <ToastContainer
+    autoClose={5000}
+    bodyClassName={null}
+    className="capitalize"
+    closeButton={
+      <CloseButton
+        ariaLabel="close"
+      />
+    }
+    closeOnClick={true}
+    draggable={true}
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-right"
+    progressClassName={null}
+    progressStyle={null}
+    rtl={false}
+    style={null}
+    toastClassName={null}
+    transition={[Function]}
+  />
+  <withRouter(Header)>
+    <div
+      className="header__right"
+    >
+      <Link
+        replace={false}
+        to="/store"
+      >
+        <div
+          className="start text__medium_bold uppercase"
+        >
+          Back to store
+        </div>
+      </Link>
+      <div
+        className="cart__wrapper"
+        onClick={[Function]}
+        role="button"
+        tabIndex="0"
+      >
+        <i
+          className="material-icons cart"
+        >
+          shopping_cart
+        </i>
+        <div
+          className="cart__count"
+        >
+          0
+        </div>
+      </div>
+    </div>
+  </withRouter(Header)>
+  <section
+    id="inventory__display"
+  >
+    <div
+      className="top"
+    >
+      <h1
+        className="header"
+      >
+        Inventory
+      </h1>
+      <button
+        className="add__grocery"
+        onClick={[Function]}
+        type="button"
+      >
+        Add Grocery
+      </button>
+    </div>
+    <InventoryList
+      groceries={
+        Array [
+          Object {
+            "_id": "5bf4754223602e00211d6587",
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "_id": "5bf4754223602e00211d6588",
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "_id": "5bf4754223602e00211d6589",
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 0,
+          },
+        ]
+      }
+      loading={false}
+      openDeleteModal={[Function]}
+      openModal={[Function]}
+    />
+  </section>
+</main>
+`;

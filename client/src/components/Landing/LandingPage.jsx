@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// eslint-disable-next-line import/no-named-as-default
 import Header from '../common/Header';
 
 import cart from '../../assets/images/cart.png';

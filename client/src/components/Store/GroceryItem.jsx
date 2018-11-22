@@ -32,9 +32,7 @@ const GroceryItem = ({
       });
     }
 
-    if (itemAdded()) {
-      return removeFromCart(_id);
-    }
+    return removeFromCart(_id);
   };
 
   const buttonText = () => {

@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroceryItemList Component renders correctly 1`] = `
+<section
+  id="grocery__display"
+>
+  <div
+    className="grocery__list"
+  >
+    <GroceryItem
+      _id="5bf4754223602e00211d6587"
+      addToCart={[MockFunction]}
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      key="5bf4754223602e00211d6587"
+      name="mamador"
+      price={1250}
+      quantity={3}
+      removeFromCart={[MockFunction]}
+    />
+    <GroceryItem
+      _id="5bf4754223602e00211d6588"
+      addToCart={[MockFunction]}
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      key="5bf4754223602e00211d6588"
+      name="sausage"
+      price={120}
+      quantity={12}
+      removeFromCart={[MockFunction]}
+    />
+    <GroceryItem
+      _id="5bf4754223602e00211d6589"
+      addToCart={[MockFunction]}
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      key="5bf4754223602e00211d6589"
+      name="salad creme"
+      price={1500}
+      quantity={0}
+      removeFromCart={[MockFunction]}
+    />
+  </div>
+</section>
+`;

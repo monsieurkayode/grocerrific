@@ -20,12 +20,13 @@ import {
 import { validateForm } from '../../../../shared/validator';
 import { toastError, toastWarning } from '../../helpers/toaster';
 import Cart from '../Store/Cart';
+// eslint-disable-next-line import/no-named-as-default
 import Header from '../common/Header';
 import InventoryList from './InventoryList';
 import ManageInventoryItem from './ManageInventoryItem';
 import DeleteModal from './DeleteModal';
 
-class InventoryPage extends Component {
+export class InventoryPage extends Component {
   static propTypes = {
     fetchGroceries: func.isRequired,
     removeGroceryFromCart: func.isRequired,
@@ -62,7 +63,9 @@ class InventoryPage extends Component {
 
   componentDidMount() {
     this.props.fetchGroceries();
-    this.rootRef.current.parentNode.parentNode.style.background = '#F6F6F6';
+    if (this.rootRef.current) {
+      this.rootRef.current.parentNode.parentNode.style.background = '#F6F6F6';
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -79,7 +82,9 @@ class InventoryPage extends Component {
   }
 
   togglePageScroll = (overflow) => {
-    this.rootRef.current.parentNode.style.overflow = overflow;
+    if (this.rootRef.current) {
+      this.rootRef.current.parentNode.parentNode.style.background = overflow;
+    }
   }
 
   toggleModal = () => {
@@ -207,7 +212,6 @@ class InventoryPage extends Component {
             <div
               role="button"
               tabIndex="0"
-              onKeyPress={() => {}}
               onClick={this.openCartModal}
               className="cart__wrapper"
             >
@@ -270,7 +274,7 @@ class InventoryPage extends Component {
   }
 }
 
-const mapStateToProps = ({ allGroceries, allCartItems }) => ({
+export const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
   makingAjaxRequest: allGroceries.makingAjaxRequest,
   error: allGroceries.error,

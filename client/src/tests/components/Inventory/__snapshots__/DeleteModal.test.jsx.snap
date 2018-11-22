@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteModal Component renders correctly 1`] = `
+<Modal
+  closeModal={[MockFunction]}
+  title="Delete Grocery"
+>
+  <div
+    className="notice"
+  >
+    <p>
+      Are you sure? This action cannot be undone!
+    </p>
+  </div>
+  <div
+    className="checkout__button"
+  >
+    <button
+      className="buy uppercase"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Confirm
+    </button>
+  </div>
+</Modal>
+`;

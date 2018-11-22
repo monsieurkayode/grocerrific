@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart Component renders correctly 1`] = `
+<Modal
+  closeModal={[MockFunction]}
+  title="grocery cart"
+>
+  <div
+    className="checkout-items"
+  >
+    <Connect(CartItem)
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      checkingOut={false}
+      id="5bf4754223602e00211d6587"
+      key="5bf4754223602e00211d6587"
+      maxQuantity={4}
+      name="mamador"
+      price={1250}
+      quantity={3}
+      removeFromCart={[MockFunction]}
+    />
+    <Connect(CartItem)
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      checkingOut={false}
+      id="5bf4754223602e00211d6588"
+      key="5bf4754223602e00211d6588"
+      maxQuantity={15}
+      name="sausage"
+      price={120}
+      quantity={12}
+      removeFromCart={[MockFunction]}
+    />
+    <Connect(CartItem)
+      cartItems={
+        Array [
+          Object {
+            "id": "5bf4754223602e00211d6587",
+            "maxQuantity": 4,
+            "name": "mamador",
+            "price": 1250,
+            "quantity": 3,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6588",
+            "maxQuantity": 15,
+            "name": "sausage",
+            "price": 120,
+            "quantity": 12,
+          },
+          Object {
+            "id": "5bf4754223602e00211d6589",
+            "maxQuantity": 10,
+            "name": "salad creme",
+            "price": 1500,
+            "quantity": 1,
+          },
+        ]
+      }
+      checkingOut={false}
+      id="5bf4754223602e00211d6589"
+      key="5bf4754223602e00211d6589"
+      maxQuantity={10}
+      name="salad creme"
+      price={1500}
+      quantity={1}
+      removeFromCart={[MockFunction]}
+    />
+  </div>
+  <div
+    className="checkout-item-wrapper total"
+  >
+    <p
+      id="total"
+    >
+      Total
+    </p>
+    <span
+      className="total-price"
+    >
+      ₦
+      6690
+    </span>
+  </div>
+  <div
+    className="checkout__button"
+  >
+    <button
+      className="buy uppercase"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Checkout
+    </button>
+  </div>
+</Modal>
+`;

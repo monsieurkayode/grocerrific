@@ -14,11 +14,12 @@ import {
 } from '../../actions/cartActions';
 import { toastWarning } from '../../helpers/toaster';
 
+// eslint-disable-next-line import/no-named-as-default
 import Header from '../common/Header';
 import GroceryItemList from './GroceryItemList';
 import Cart from './Cart';
 
-class StorePage extends Component {
+export class StorePage extends Component {
   static propTypes = {
     fetchGroceries: func.isRequired,
     groceries: arrayOf(shape({})).isRequired,
@@ -40,7 +41,9 @@ class StorePage extends Component {
 
   componentDidMount() {
     this.props.fetchGroceries();
-    this.rootRef.current.parentNode.parentNode.style.background = '#F6F6F6';
+    if (this.rootRef.current) {
+      this.rootRef.current.parentNode.parentNode.style.background = '#F6F6F6';
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -57,7 +60,9 @@ class StorePage extends Component {
   }
 
   togglePageScroll = (overflow) => {
-    this.rootRef.current.parentNode.style.overflow = overflow;
+    if (this.rootRef.current) {
+      this.rootRef.current.parentNode.style.overflow = overflow;
+    }
   }
 
   toggleModal = () => {
@@ -108,7 +113,6 @@ class StorePage extends Component {
             <div
               role="button"
               tabIndex="0"
-              onKeyPress={() => {}}
               onClick={this.toggleModal}
               className="cart__wrapper"
             >
@@ -138,7 +142,7 @@ class StorePage extends Component {
   }
 }
 
-const mapStateToProps = ({ allGroceries, allCartItems }) => ({
+export const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   isLoading: allGroceries.isLoading,
   groceries: allGroceries.groceries,
   cartItems: allCartItems.cartItems,

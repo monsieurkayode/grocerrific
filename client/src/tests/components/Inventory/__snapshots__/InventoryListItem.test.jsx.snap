@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InventoryListItem Component renders correctly 1`] = `
+<div
+  className="inventory__item_wrapper"
+>
+  <div
+    className="item-name"
+  >
+    mamador
+  </div>
+  <div
+    className="item-price"
+  >
+    ₦
+    1250
+  </div>
+  <div
+    className="item-quantity"
+  >
+    3
+  </div>
+  <div
+    className="buttons"
+  >
+    <button
+      className="edit"
+      onClick={[Function]}
+      type="button"
+    >
+      Edit
+    </button>
+    <button
+      className="delete"
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </div>
+</div>
+`;

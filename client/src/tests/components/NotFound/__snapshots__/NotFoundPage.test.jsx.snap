@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage Component renders correctly 1`] = `
+<main
+  className="container"
+  id="inventory"
+>
+  <withRouter(Header)>
+    <div
+      className="header__right"
+    >
+      <Link
+        replace={false}
+        to="/store"
+      >
+        <div
+          className="start text__medium_bold uppercase"
+        >
+          Back to store
+        </div>
+      </Link>
+    </div>
+  </withRouter(Header)>
+  <section
+    id="inventory__display"
+  >
+    <NoContent
+      content="404! You have reached the end of the rainbow :-)"
+    />
+  </section>
+</main>
+`;

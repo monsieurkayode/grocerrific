@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingPage Component renders correctly 1`] = `
+<main
+  className="container"
+  id="landing"
+>
+  <withRouter(Header)>
+    <div
+      className="header__right"
+    >
+      <Link
+        replace={false}
+        to="/store"
+      >
+        <div
+          className="start text__medium_bold uppercase"
+        >
+          Enter Store
+        </div>
+      </Link>
+    </div>
+  </withRouter(Header)>
+  <section>
+    <div
+      className="section__left"
+    >
+      <div
+        className="info__wrapper_top"
+      >
+        <div
+          className="info__wrapper_text text__bold"
+        >
+          Grocerrific
+        </div>
+        <div
+          className="info__wrapper_text text__bold"
+        >
+          Marketplace
+        </div>
+      </div>
+      <div
+        className="info__wrapper_bottom"
+      >
+        <p
+          className="info__wrapper_text"
+        >
+          We deliver on our promise of giving our users the best grocery shopping experience. Because we care a lot about our planet, all our products are organic and did we forget to mention terrific too?
+        </p>
+      </div>
+      <div
+        className="buttons__wrapper"
+      >
+        <div
+          className="designed__by"
+        >
+          <img
+            alt="Brush"
+            src="test-file-mock"
+          />
+          <div
+            className="info uppercase"
+          >
+            <p
+              className="info__top"
+            >
+              Designed By
+            </p>
+            <p
+              className="info__bottom"
+            >
+              Emperor
+              <span>
+                ™
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          className="join"
+        >
+          <img
+            alt="Cart"
+            src="test-file-mock"
+          />
+          <div
+            className="info uppercase"
+          >
+            <p
+              className="info__top"
+            >
+              Join the
+            </p>
+            <p
+              className="info__bottom"
+            >
+              Marketplace
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="section__right"
+    >
+      <div
+        id="card"
+      />
+    </div>
+  </section>
+</main>
+`;
