@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';

@@ -2,14 +2,27 @@
   @extend %flex__container_column;
   @extend %nowrap;
   min-height: 100%;
+  min-width: 100%;
 
-  header { @include header(); }
+  header {
+    @include header();
+    @media only screen and (min-width: 1800px) {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
 
   section {
     flex: 1;
     @extend %flex__container_row;
     width: 100%;
     margin-top: 10%;
+
+    @media only screen and (min-width: 1800px) {
+      width: 80%;
+      margin-right: auto;
+      margin-left: auto;
+    }
 
     .section__left {
       width: 48%;
@@ -120,6 +133,7 @@
         max-width: px-to-rem(600px);
         min-width: px-to-rem(300px);
         min-height: px-to-rem(400px);
+        // margin: 0 auto;
         background: #FFF url('../images/groceries.jpg') no-repeat center center / contain;
         border-radius: 5px;
         box-shadow: 0 0 30px 0 $light-grey-1,

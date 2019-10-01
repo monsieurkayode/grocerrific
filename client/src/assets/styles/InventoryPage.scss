@@ -2,6 +2,7 @@
   @extend %flex__container_column;
   @extend %nowrap;
   min-height: 100%;
+  min-width: 100%;
 
   .no-content {
     width: 100%;
@@ -32,6 +33,11 @@
 
     .top {
       padding: 0 8%;
+
+      @media only screen and (min-width: 1800px) {
+        padding-right: 20%;
+        padding-left: 20%;
+      }
 
       .header {
         display: inline-block;
@@ -69,6 +75,12 @@
     .inventory__list {
       margin: 40px auto;
       width: 80%;
+
+      @media only screen and (min-width: 1800px) {
+        width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+      }
 
       .table-header {
         @extend %flex__container_row;

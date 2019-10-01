@@ -7,6 +7,7 @@ import {
 } from 'prop-types';
 
 import Modal from '../common/Modal';
+// eslint-disable-next-line import/no-named-as-default
 import CartItem from './CartItem';
 
 const Cart = ({
