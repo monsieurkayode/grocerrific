@@ -72,7 +72,7 @@
     "jest": "^23.6.0",
     "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
-    "node-sass": "^4.9.3",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
