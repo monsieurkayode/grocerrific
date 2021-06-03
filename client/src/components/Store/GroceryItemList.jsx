@@ -18,11 +18,14 @@ const GroceryItemList = ({
   <section id="grocery__display">
     {loading && <Loader size={60} />}
     <div className="grocery__list">
-      {!loading && groceries.length === 0 && (
+      {
+      !loading && groceries.length === 0 && (
       <NoContent
         content="There are no groceries available now. Check back later :-("
-      />)}
-      {!loading
+      />
+      )}
+      {
+        !loading
         && groceries
           .map(grocery => (
             <GroceryItem

@@ -20,18 +20,6 @@ import GroceryItemList from './GroceryItemList';
 import Cart from './Cart';
 
 export class StorePage extends Component {
-  static propTypes = {
-    fetchGroceries: func.isRequired,
-    groceries: arrayOf(shape({})).isRequired,
-    cartItems: arrayOf(shape({})).isRequired,
-    isLoading: bool.isRequired,
-    addGroceryToCart: func.isRequired,
-    removeGroceryFromCart: func.isRequired,
-    checkout: func.isRequired,
-    checkingOut: bool.isRequired,
-    clearGroceryCart: func.isRequired
-  }
-
   state = {
     displayModal: false,
     orderProcessed: false
@@ -148,6 +136,18 @@ export const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   cartItems: allCartItems.cartItems,
   checkingOut: allCartItems.checkingOut
 });
+
+StorePage.propTypes = {
+  fetchGroceries: func.isRequired,
+  groceries: arrayOf(shape({})).isRequired,
+  cartItems: arrayOf(shape({})).isRequired,
+  isLoading: bool.isRequired,
+  addGroceryToCart: func.isRequired,
+  removeGroceryFromCart: func.isRequired,
+  checkout: func.isRequired,
+  checkingOut: bool.isRequired,
+  clearGroceryCart: func.isRequired
+};
 
 export default connect(
   mapStateToProps, {

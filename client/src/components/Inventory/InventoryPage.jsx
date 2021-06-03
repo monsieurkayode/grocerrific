@@ -27,21 +27,6 @@ import ManageInventoryItem from './ManageInventoryItem';
 import DeleteModal from './DeleteModal';
 
 export class InventoryPage extends Component {
-  static propTypes = {
-    fetchGroceries: func.isRequired,
-    removeGroceryFromCart: func.isRequired,
-    addGroceryItem: func.isRequired,
-    groceries: arrayOf(shape({})).isRequired,
-    cartItems: arrayOf(shape({})).isRequired,
-    isLoading: bool.isRequired,
-    makingAjaxRequest: bool.isRequired,
-    error: shape({}).isRequired,
-    setError: func.isRequired,
-    updateGroceryItem: func.isRequired,
-    checkout: func.isRequired,
-    checkingOut: bool.isRequired
-  }
-
   static initialState = () => ({
     displayModal: false,
     displayCart: false,
@@ -248,7 +233,8 @@ export class InventoryPage extends Component {
             handleFocus={this.handleFocus}
             saving={makingAjaxRequest}
             errors={errors}
-          />)
+          />
+        )
         }
         { displayCart && (
           <Cart
@@ -257,7 +243,8 @@ export class InventoryPage extends Component {
             removeFromCart={this.props.removeGroceryFromCart}
             checkout={this.handleCheckout}
             checkingOut={checkingOut}
-          />)
+          />
+        )
         }
         {
           displayDeleteModal && (
@@ -282,6 +269,23 @@ export const mapStateToProps = ({ allGroceries, allCartItems }) => ({
   cartItems: allCartItems.cartItems,
   checkingOut: allCartItems.checkingOut
 });
+
+InventoryPage.propTypes = {
+  fetchGroceries: func.isRequired,
+  removeGroceryFromCart: func.isRequired,
+  addGroceryItem: func.isRequired,
+  clearGroceryCart: func.isRequired,
+  deleteGroceryItem: func.isRequired,
+  groceries: arrayOf(shape({})).isRequired,
+  cartItems: arrayOf(shape({})).isRequired,
+  isLoading: bool.isRequired,
+  makingAjaxRequest: bool.isRequired,
+  error: shape({}).isRequired,
+  setError: func.isRequired,
+  updateGroceryItem: func.isRequired,
+  checkout: func.isRequired,
+  checkingOut: bool.isRequired
+};
 
 export default connect(mapStateToProps, {
   fetchGroceries,

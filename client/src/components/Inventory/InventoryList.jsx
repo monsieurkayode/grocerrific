@@ -19,14 +19,17 @@ const InventoryList = ({
     {!loading && groceries.length === 0 && (
     <NoContent
       content="There are currently no items in the Inventory"
-    />)}
-    {!loading && groceries.length > 0 && (
+    />
+    )}
+    {
+      !loading && groceries.length > 0 && (
       <div className="table-header">
         <div className="name">Name</div>
         <div>Price</div>
         <div>Stock</div>
         <div className="action">&nbsp;</div>
-      </div>)
+      </div>
+      )
     }
     {!loading && groceries.map(grocery => (
       <InventoryListItem
