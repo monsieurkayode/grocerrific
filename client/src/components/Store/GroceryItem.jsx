@@ -15,6 +15,7 @@ const GroceryItem = ({
   name,
   price,
   quantity,
+  imageUrl,
   addToCart,
   removeFromCart,
   cartItems
@@ -45,7 +46,7 @@ const GroceryItem = ({
   return (
     <div className="grocery__list_item">
       <div className="image__wrapper effect">
-        <img src={defaultImage} alt="" />
+        <img src={imageUrl} alt="" />
       </div>
       <article className="grocery__info">
         <h3 className="grocery__name">
@@ -66,12 +67,16 @@ const GroceryItem = ({
   );
 };
 
+GroceryItem.defaultProps = {
+  imageUrl: defaultImage
+};
 
 GroceryItem.propTypes = {
   _id: string.isRequired,
   name: string.isRequired,
   price: number.isRequired,
   quantity: number.isRequired,
+  imageUrl: string,
   addToCart: func.isRequired,
   removeFromCart: func.isRequired,
   cartItems: arrayOf(shape({})).isRequired
