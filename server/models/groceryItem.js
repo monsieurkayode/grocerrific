@@ -20,6 +20,10 @@ const groceryItemSchema = new Schema({
     type: Number,
     min: [0, 'Invalid quanity value'],
     required: [true, 'Quantity is required'],
+  },
+  imageUrl: {
+    type: String,
+    required: false
   }
 });
 

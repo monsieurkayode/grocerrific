@@ -17,28 +17,25 @@ const InventoryList = ({
   <div className="inventory__list">
     {loading && <Loader size={60} />}
     {!loading && groceries.length === 0 && (
-    <NoContent
-      content="There are currently no items in the Inventory"
-    />
+      <NoContent content="There are currently no items in the Inventory" />
     )}
-    {
-      !loading && groceries.length > 0 && (
+    {!loading && groceries.length > 0 && (
       <div className="table-header">
         <div className="name">Name</div>
         <div>Price</div>
         <div>Stock</div>
         <div className="action">&nbsp;</div>
       </div>
-      )
-    }
-    {!loading && groceries.map(grocery => (
-      <InventoryListItem
-        key={grocery._id}
-        openModal={openModal}
-        openDeleteModal={openDeleteModal}
-        {...grocery}
-      />
-    ))}
+    )}
+    {!loading
+      && groceries.map(grocery => (
+        <InventoryListItem
+          key={grocery._id}
+          openModal={openModal}
+          openDeleteModal={openDeleteModal}
+          {...grocery}
+        />
+      ))}
   </div>
 );
 
@@ -46,7 +43,7 @@ InventoryList.propTypes = {
   openModal: func.isRequired,
   openDeleteModal: func.isRequired,
   groceries: arrayOf(shape({})).isRequired,
-  loading: bool.isRequired
+  loading: bool.isRequired,
 };
 
 export default InventoryList;

@@ -18,24 +18,21 @@ const GroceryItemList = ({
   <section id="grocery__display">
     {loading && <Loader size={60} />}
     <div className="grocery__list">
-      {
-      !loading && groceries.length === 0 && (
-      <NoContent
-        content="There are no groceries available now. Check back later :-("
-      />
+      {!loading && groceries.length === 0 && (
+        <NoContent
+          content="There are no groceries available now. Check back later :-("
+        />
       )}
-      {
-        !loading
-        && groceries
-          .map(grocery => (
-            <GroceryItem
-              key={grocery._id}
-              {...grocery}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-              cartItems={cartItems}
-            />
-          ))}
+      {!loading
+        && groceries.map(grocery => (
+          <GroceryItem
+            key={grocery._id}
+            {...grocery}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+            cartItems={cartItems}
+          />
+        ))}
     </div>
   </section>
 );
@@ -45,7 +42,7 @@ GroceryItemList.propTypes = {
   cartItems: arrayOf(shape({})).isRequired,
   loading: bool.isRequired,
   addToCart: func.isRequired,
-  removeFromCart: func.isRequired
+  removeFromCart: func.isRequired,
 };
 
 export default GroceryItemList;
