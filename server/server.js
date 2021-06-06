@@ -81,7 +81,7 @@ app.get('/api', (req, res) => {
 
 app.use(routes);
 
-app.use('*', (req, res) => {
+app.use('*', (_, res) => {
   res.sendFile(resolve(__dirname, '../client/index.html'));
 });
 
@@ -94,6 +94,6 @@ app.listen(port, (err) => {
   db.once('open', () => {
     console.info('🍺 Database connection established...');
     console.info(`🍺 Server started on ${port}`);
-    if (env !== 'production') seedDb();
+    seedDb();
   });
 });
