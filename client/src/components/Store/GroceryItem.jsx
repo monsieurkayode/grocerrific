@@ -45,9 +45,10 @@ const GroceryItem = ({
 
   return (
     <div className="grocery__list_item">
-      <div className="image__wrapper effect">
-        <img src={imageUrl} alt="" />
-      </div>
+      <div
+        style={{ backgroundImage: `url(${imageUrl})` }}
+        className="image__wrapper effect"
+      />
       <article className="grocery__info">
         <h3 className="grocery__name">
           {name}<span className="grocery__price">&#8358;{price}</span>

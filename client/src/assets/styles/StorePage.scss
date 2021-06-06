@@ -53,7 +53,8 @@
   }
 
   .no-content {
-    width: 95%;
+    width: px-to-rem(1314px);
+    margin: 0 auto;
   }
 
   #grocery__display {
@@ -73,36 +74,37 @@
       @extend %flex__container_row;
       flex-wrap: wrap;
       justify-content: flex-start;
-      width: 95%;
+      max-width: px-to-rem(1314px);
       margin-left: auto;
+      margin-right: auto;
 
       .grocery__list_item {
         flex: 1 0 30%;
-        max-width: px-to-rem(300px);
-        min-width: px-to-rem(300px);
+        max-width: px-to-rem(302px);
+        min-width: px-to-rem(302px);
         background: #FFF;
         border-radius: 5px;
-        padding: 20px;
         margin: 1%;
         box-shadow: 0 15px 20px -6px $light-grey-1;
         overflow-x: hidden;
 
         .image__wrapper {
-          min-height: 172px;
-          img {
-            width: 100%;
-            transition: all .5s linear;
-            filter: grayscale(50%);
-            cursor: pointer;
-  
-            &:hover {
-              transform: scale(1.1);
-              filter: grayscale(0%);
-            }
+          min-height: 200px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          transition: all .5s linear;
+          filter: grayscale(50%);
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.1);
+            filter: grayscale(0%);
           }
         }
 
         .grocery__info {
+          padding: 20px;
           .grocery__name {
             font-family: $font-family-josefin;
             padding: 6px 0;
@@ -122,19 +124,20 @@
             .add {
               font-weight: 500;
               border-radius: 5px;
-              background: #ffc741;
+              background: #54739b;
               border: none;
               padding: 5px 10px;
               cursor: pointer;
               outline: none;
+              color: #f6f6f6;
               min-width: px-to-rem(100px);
 
               &:active:not(:disabled) {
-                background: #fdd26d;
+                background: #54739bd1;
               }
 
               &:disabled {
-                background: #fdd26d;
+                background: #54739b8f;
                 cursor: not-allowed;
               }
             }
